@@ -76,11 +76,16 @@
     <input type="password" class="form-control" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHELP">
     <div id="JSecretHelp" class="form-text">Secret of your Jitsi application.</div>
   </div>
+  <!--
 <div class="border border-warning">
   <div class="mb-3">
     <label for="InputSMTPURI" class="form-label">SMTP server address</label>
     <input type="text" class="form-control" name="InputSMTPURI" id="InputSMTPURI" aria-describedby="SMTPURIHelp">
     <div id="SMTPURIHelp" class="form-text">Address of your SMTP server for the notification.</div>
+  </div>
+    <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" name="CheckSMTPAuth" id="CheckSMTPAuth">
+    <label class="form-check-label" for="CheckSMTPAuth">Needs authentification</label>
   </div>
   <div>
     <label for="InputSMTPLogin" class="form-label">SMTP server login</label>
@@ -92,6 +97,7 @@
     <input type="password" class="form-control" name="InputSMTPPassword" id="InputSMTPPassword">
   </div>
 </div>
+-->
   <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" name="CheckModerator" id="CheckModerator">
     <label class="form-check-label" for="CheckModerator">Is moderator</label>
