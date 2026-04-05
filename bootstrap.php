@@ -19,11 +19,11 @@ function base64UrlEncode($text)
 function CreateBaseURI ($proto, $uri)
 {
 if ($proto != "http" or $proto != "https") {
-    $proto ="https:";
+    $proto ="https://";
     }
     else 
         {
-            $proto=$proto.':';
+            $proto=$proto.'://';
         }
 if (!isset($uri)) {$proto="";};
     $text=$proto.$uri;

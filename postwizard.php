@@ -12,10 +12,10 @@ $mail = new PHPMailer(true);
 
 // SMTP server configuration
 $mail->isSMTP();
-$mail->Host = 'smtp.sendlayer.net';
-$mail->SMTPAuth = true;
-$mail->Username = 'your_sendlayer_username';
-$mail->Password = 'your_sendlayer_password';
+$mail->Host = EnvIsSet('SMTP_SRV','InputSMTPURI', 'localhost');
+$mail->SMTPAuth = EnvIsSet('SMTP_AUTH','CheckSMTPAuth', true);
+$mail->Username = EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user");
+$mail->Password = EnvIsSet('SMTP_PWD','CheckSMTPPassword', "changemesmtp");
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-$mail->Port = 587;
+$mail->Port = EnvIsSet('SMTP_PWD','CheckSMTPPassword', 587);
 ?>

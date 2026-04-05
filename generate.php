@@ -2,15 +2,9 @@
 ini_set ('display_errors', 1);
 
 require 'bootstrap.php';
-$expires=getenv('EXPIRES');
 
 // get the local secret key
-$secret = getenv('JWT_KEY');
-$hasroom=$_POST['InputRoom'];
-
-if (!isset($hasroom)) {
-    $hasroom = '*'; 
-    }
+$secret = EnvIsSet('JWT_KEY','InputJSecret', 'nosecret');
 
 // Create the token header
 $header = json_encode([
@@ -21,13 +15,13 @@ $header = json_encode([
 // Create the token payload
 $payload = json_encode([
     'user_id' => array(
-        "name" => $_POST['InputName'],
-        "id" => $_POST['InputEmail'],
-        "email" => $_POST['InputEmail']),
-    'moderator' => $_POST['CheckModerator'],
-    'sub' => $_POST['InputURI'],
-    'room' => $hasroom,
-    'exp' => time() + $expires*60
+        "name" => EnvIsSet('','InputName', 'Anonimous'),
+        "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
+        "email" => EnvIsSet('','InputEmail', 'anonimous@email.com')),
+    'moderator' => EnvIsSet('','CheckModerator', false),
+    'sub' => EnvIsSet('','InputURI', ''),
+    'room' => EnvIsSet('','InputRoom', '*'),
+    'exp' => time() + EnvIsSet('EXPIRES','ExpirationTime', '30')*60
 ]);
 
 // Encode Header
@@ -51,7 +45,7 @@ $link=CreateBaseURI(getenv('URI_PROTO'), $_POST['InputURI'])."/".$hasroom."&jwt=
 
 if (isset($_POST['InputURI']))
     {
-    echo "Your Link:\n" . $link . $jwt ."\n";
+    echo "Your Link:<br /> <a href=\"" . $link . $jwt ."\">".$link . $jwt."</a><br />";
     }
 echo "Your token:\n" . $jwt . "\n";
 ?>

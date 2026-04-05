@@ -1,5 +1,6 @@
 <html>
     <head>
+    <meta charset="utf-8" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="js/bootstrap.min.js" rel="text/javascript">
     <style>
@@ -47,52 +48,52 @@
 <form action="generate.php" enctype="multipart/form-data" method="POST" >
     <div class="mb-3">
     <label for="InputName" class="form-label">Person name</label>
-    <input type="text" class="form-control" id="InputName" placeholder="Anonymous" aria-describedby="NameHelp">
+    <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Anonymous" aria-describedby="NameHelp">
     <div id="NameHelp" class="form-text">Participant's name</div>
   </div>
   <div class="mb-3">
     <label for="InputEmail" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" required>
+    <input type="email" class="form-control" name="InputEmail" id="InputEmail" aria-describedby="emailHelp" required>
     <div id="emailHelp" class="form-text">Whom you want to meet</div>
   </div>
     <div class="mb-3">
     <label for="InputURI" class="form-label">Jitsi Server URL</label>
-    <input type="text" class="form-control" id="InputURI" aria-describedby="URIHelp">
+    <input type="text" class="form-control" name="InputURI" id="InputURI" aria-describedby="URIHelp">
     <div id="URIHelp" class="form-text">Domain of your Jitsi server</div>
   </div>
     <div class="mb-3">
     <label for="InputRoom" class="form-label">Room name</label>
-    <input type="text" class="form-control" id="InputRoom" placeholder="*" aria-describedby="RoomHelp">
+    <input type="text" class="form-control" name="InputRoom"  placeholder="*" aria-describedby="RoomHelp">
     <div id="RoomHelp" class="form-text">Permitted room</div>
   </div>
   <div class="mb-3">
     <label for="InputAppid" class="form-label">Application ID</label>
-    <input type="text" class="form-control" id="InputAppid" aria-describedby="AppidHelp" required>
+    <input type="text" class="form-control" name="InputAppid" id="InputAppid" aria-describedby="AppidHelp" required>
     <div id="AppidHelp" class="form-text">ID of your Jitsi application.</div>
   </div>
   <div class="mb-3">
     <label for="InputJSecret" class="form-label">JitsiSecret</label>
-    <input type="password" class="form-control" id="InputJSecret" aria-describedby="JSecretHELP">
+    <input type="password" class="form-control" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHELP">
     <div id="JSecretHelp" class="form-text">Secret of your Jitsi application.</div>
   </div>
 <div class="border border-warning">
   <div class="mb-3">
     <label for="InputSMTPURI" class="form-label">SMTP server address</label>
-    <input type="text" class="form-control" id="InputSMTPURI" aria-describedby="SMTPURIHelp">
+    <input type="text" class="form-control" name="InputSMTPURI" id="InputSMTPURI" aria-describedby="SMTPURIHelp">
     <div id="SMTPURIHelp" class="form-text">Address of your SMTP server for the notification.</div>
   </div>
   <div>
     <label for="InputSMTPLogin" class="form-label">SMTP server login</label>
-    <input type="text" class="form-control" id="InputSMTPLogin" aria-describedby="SMTPLoginHelp">
+    <input type="text" class="form-control" name="InputSMTPLogin" id="InputSMTPLogin" aria-describedby="SMTPLoginHelp">
     <div id="SMTPLoginHelp" class="form-text">User of your SMTP server for the notification</div>
   </div>
   <div class="mb-3">
     <label for="InputSMTPPassword" class="form-label">SMTP server password</label>
-    <input type="password" class="form-control" id="InputSMTPPassword">
+    <input type="password" class="form-control" name="InputSMTPPassword" id="InputSMTPPassword">
   </div>
 </div>
   <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="CheckModerator">
+    <input type="checkbox" class="form-check-input" name="CheckModerator" id="CheckModerator">
     <label class="form-check-label" for="CheckModerator">Is moderator</label>
   </div>
 
