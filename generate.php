@@ -6,6 +6,11 @@ $expires=getenv('EXPIRES');
 
 // get the local secret key
 $secret = getenv('JWT_KEY');
+$hasroom=$_POST['InputRoom'];
+
+if (!isset($hasroom)) {
+    $hasroom = '*'; 
+    }
 
 // Create the token header
 $header = json_encode([
@@ -15,14 +20,14 @@ $header = json_encode([
 
 // Create the token payload
 $payload = json_encode([
-    'user_id' => 1,
-    'moderator' => $_POST['InputRoom'],
-    'sub' => "",
-    'room' => $_POST['InputRoom'],
-    'exp' => time() + $extpires*60
-
-    
-
+    'user_id' => array(
+        "name" => $_POST['InputName'],
+        "id" => $_POST['InputEmail'],
+        "email" => $_POST['InputEmail']),
+    'moderator' => $_POST['CheckModerator'],
+    'sub' => $_POST['InputURI'],
+    'room' => $hasroom,
+    'exp' => time() + $expires*60
 ]);
 
 // Encode Header
@@ -40,5 +45,13 @@ $base64UrlSignature = base64UrlEncode($signature);
 // Create JWT
 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
+if ($hasroom="*"){$hasroom="";}
+//Create Link
+$link=CreateBaseURI(getenv('URI_PROTO'), $_POST['InputURI'])."/".$hasroom."&jwt=";
+
+if (isset($_POST['InputURI']))
+    {
+    echo "Your Link:\n" . $link . $jwt ."\n";
+    }
 echo "Your token:\n" . $jwt . "\n";
 ?>

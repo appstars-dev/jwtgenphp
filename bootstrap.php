@@ -25,7 +25,7 @@ if ($proto != "http" or $proto != "https") {
         {
             $proto=$proto.':';
         }
-if (empty($uri)) {$proto="";};
+if (!isset($uri)) {$proto="";};
     $text=$proto.$uri;
         return $text;
 }
