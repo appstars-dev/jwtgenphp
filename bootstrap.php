@@ -30,4 +30,12 @@ if (!isset($uri)) {$proto="";};
         return $text;
 }
 
+function EnvIsSet ($env, $post, $default) {
+$value = $default;
+if (getenv($env) == null) 
+    {
+        if (($_POST[$post]) == null){$value = $default;} else {$value=$_POST[$post];}
+    } else {$value=getenv($env);}
+    return $value;
+}
 ?>
