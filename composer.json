@@ -1,0 +1,22 @@
+{
+    "name": "dragonzx/jwtgen",
+    "description": "JWT generator for jitsi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vitaliy Zhukov",
+            "email": "dragonzx90@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "phpmailer/phpmailer": "dev-master",
+        "vlucas/phpdotenv": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+
+}
