@@ -3,6 +3,7 @@ require_once 'bootstrap.php';?>
 <html>
     <head>
     <meta charset="utf-8" />
+    <link rel="icon" href="images/no_avatar.png" type="image/png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="js/bootstrap.min.js" rel="text/javascript">
     <style>
