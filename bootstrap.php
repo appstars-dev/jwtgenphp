@@ -38,4 +38,8 @@ if ($_ENV[$env] == null)
     } else {$value=getenv($env);}
     return $value;
 }
+
+function HideDiv($env, $css_class){
+    if($_ENV[$env] !== null){echo $css_class."{display:none;}";}
+}
 ?>
