@@ -4,8 +4,8 @@ if (file_exists('vendor/autoload.php')) {
     require_once('vendor/autoload.php');
 }
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__); //Notice the Namespace and Class
-$dotenv->load();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
 
 function base64UrlEncode($text)
 {
@@ -32,7 +32,7 @@ if (!isset($uri)) {$proto="";};
 
 function EnvIsSet ($env, $post, $default) {
 $value = $default;
-if (getenv($env) == null) 
+if ($_ENV[$env] == null) 
     {
         if (($_POST[$post]) == null){$value = $default;} else {$value=$_POST[$post];}
     } else {$value=getenv($env);}
