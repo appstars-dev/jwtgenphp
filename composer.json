@@ -8,7 +8,7 @@
             "email": "dragonzx90@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "phpmailer/phpmailer": "7.0.2",
         "vlucas/phpdotenv": "5.6.3"
