@@ -113,13 +113,11 @@ require_once 'bootstrap.php';?>
     <label for="InputSMTPPassword" class="form-label">SMTP server password</label>
     <input type="password" class="form-control" name="InputSMTPPassword" id="InputSMTPPassword">
   </div>
-</div>
-
 
 </div>
   <button type="submit" class="btn btn-primary">Generate</button>
 </form>
 </div>
-
+</div>
 </body>
-<html>
+</html>

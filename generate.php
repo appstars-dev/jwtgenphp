@@ -19,7 +19,7 @@ $payload = json_encode([
         "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
         "email" => EnvIsSet('','InputEmail', 'anonimous@email.com')),
     'moderator' => EnvIsSet('','CheckModerator', false),
-    'sub' => EnvIsSet('','InputURI', ''),
+    'sub' => EnvIsSet('JITSI_URI','InputURI', ''),
     'room' => EnvIsSet('','InputRoom', '*'),
     'exp' => time() + EnvIsSet('EXPIRES','ExpirationTime', '30')*60
 ]);
