@@ -5,7 +5,8 @@ require_once 'bootstrap.php';?>
     <meta charset="utf-8" />
     <link rel="icon" href="images/no_avatar.png" type="image/png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="js/bootstrap.min.js" rel="text/javascript">
+    <link href="js/bootstrap.bundle.min.js" rel="text/javascript">
+    <link href="js/jquery.js" rel="text/javascript">
     <style>
         #wrapper{margin: 15px}
         .border{padding: 10px}
