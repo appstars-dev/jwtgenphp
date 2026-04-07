@@ -6,7 +6,7 @@ require_once 'bootstrap.php';?>
     <link rel="icon" href="images/no_avatar.png" type="image/png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="js/bootstrap.bundle.min.js" rel="text/javascript">
-    <link href="js/jquery.js" rel="text/javascript">
+    <link href="js/jquery-4.0.0.min.js" rel="text/javascript">
     <style>
         #wrapper{margin: 15px}
         .border{padding: 10px}
@@ -23,7 +23,7 @@ require_once 'bootstrap.php';?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<?php echo ($_ENV['URI_PROTO'].':'. $_ENV['BASE_URI'])?>;#"><img src="images/no_avatar.png" width="64px"></a>
+    <a class="navbar-brand" href="<?php echo ($_ENV['URI_PROTO'].':'. $_ENV['BASE_URI'])?>"><img src="images/no_avatar.png" width="64px"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -86,12 +86,12 @@ require_once 'bootstrap.php';?>
   </div>
   <div class="mb-3 div_appid">
     <label for="InputAppid" class="form-label">Application ID</label>
-    <input type="text" class="form-control" name="InputAppid" id="InputAppid" aria-describedby="AppidHelp" required>
+    <input type="text" class="form-control" name="InputAppid" id="InputAppid" aria-describedby="AppidHelp" <?php if (empty($_ENV['APP_ID']) or strcmp($_ENV['APP_ID'], "") == 0){echo 'required';} ?> >
     <div id="AppidHelp" class="form-text">ID of your Jitsi application.</div>
   </div>
   <div class="mb-3 div_secret">
     <label for="InputJSecret" class="form-label">JitsiSecret</label>
-    <input type="password" class="form-control" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHELP">
+    <input type="password" class="form-control" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHELP" <?php if (empty($_ENV['JWT_KEY'])){echo 'required';} ?> >
     <div id="JSecretHelp" class="form-text">Secret of your Jitsi application.</div>
   </div>
 <div class="border border-warning smtp_block">

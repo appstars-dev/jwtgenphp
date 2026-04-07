@@ -32,14 +32,14 @@ if (!isset($uri)) {$proto="";};
 
 function EnvIsSet ($env, $post, $default) {
 $value = $default;
-if ($_ENV[$env] == null) 
+if (empty($_ENV[$env]) or strcmp($_ENV[$env], "") == 0)
     {
-        if (($_POST[$post]) == null){$value = $default;} else {$value=$_POST[$post];}
-    } else {$value=getenv($env);}
+        if (empty($_POST[$post]) or strcmp($_POST[$post], "") == 0){$value = $default;} else {$value=$_POST[$post];}
+    } else {$value=$_ENV[$env];}
     return $value;
 }
 
 function HideDiv($env, $css_class){
-    if($_ENV[$env] !== null){echo $css_class."{display:none;}";}
+    if($_ENV[$env] !== null and strcmp($_ENV[$env], "") == 1){echo $css_class."{display:none;}";}
 }
 ?>

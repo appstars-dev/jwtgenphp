@@ -41,9 +41,10 @@ $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
 if ($hasroom="*"){$hasroom="";}
 //Create Link
-$link=CreateBaseURI($_ENV['URI_PROTO'], $_POST['InputURI'])."/".$hasroom."&jwt=";
+$jituri = EnvIsSet('JITSI_URI','InputURI','');
+$link = CreateBaseURI($_ENV['URI_PROTO'], $jituri)."/".$hasroom."&jwt=";
 
-if (isset($_POST['InputURI']))
+if (isset($jituri))
     {
     echo "Your Link:<br /> <a href=\"" . $link . $jwt ."\">".$link . $jwt."</a><br />";
     }
