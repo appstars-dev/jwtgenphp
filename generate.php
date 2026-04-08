@@ -56,6 +56,7 @@ $jituri = EnvIsSet('JITSI_URI','InputURI','');
 $link = CreateBaseURI($_ENV['URI_PROTO'], $jituri)."/".$hasroom."&jwt=";
 
 // Output
+if (isset($mail_wizard)){echo('');} else {
 echo $fhead;
 if (isset($jituri))
     {
@@ -63,4 +64,28 @@ if (isset($jituri))
     }
 echo '<div class="shadow p-3 mb-5 bg-body rounded"><h2>Your token:</h2>' . $jwt . '</div>';
 echo $ffoot;
-?>
+}
+
+//For mailing
+$mail_text='<p>You were suggested to the Jitsi conference, In case you want to participate meeting, please click the button below. <br> Be careful, doublecheck the mail sender to avoid unwanted curcumstances</p>'; 
+$mail_btn= '
+<style>
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+</style>
+
+<p style="margin:20px"><button onclick="document.location=\''. $link . $jwt .'\'">Join</button></div>';
+$mail_link= '<h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>'; ?>

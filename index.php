@@ -56,7 +56,7 @@ require_once 'bootstrap.php';?>
 
 <div id="wrapper">
 
-<form action="generate.php" enctype="multipart/form-data" method="POST" >
+<form action="#" enctype="multipart/form-data" method="POST" >
     <div class="mb-3">
     <label for="InputName" class="form-label">Person name</label>
     <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Anonymous" aria-describedby="NameHelp">
@@ -115,7 +115,8 @@ require_once 'bootstrap.php';?>
   </div>
 
 </div>
-  <button type="submit" class="btn btn-primary">Generate</button>
+  <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary">Generate</button>
+  <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary">Mail to</button>
 </form>
 </div>
 </div>
