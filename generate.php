@@ -1,6 +1,17 @@
 <?php 
-ini_set ('display_errors', 1);
+// HTML Init
+$fhead='<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="images/no_avatar.png" type="image/png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>';
+$ffoot= '
+</body>
+</html>';
 
+// need functions
 require 'bootstrap.php';
 
 // get the local secret key
@@ -44,9 +55,12 @@ if ($hasroom="*"){$hasroom="";}
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
 $link = CreateBaseURI($_ENV['URI_PROTO'], $jituri)."/".$hasroom."&jwt=";
 
+// Output
+echo $fhead;
 if (isset($jituri))
     {
-    echo "Your Link:<br /> <a href=\"" . $link . $jwt ."\">".$link . $jwt."</a><br />";
+    echo '<div class="shadow p-3 mb-5 bg-body rounded"> <h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>';
     }
-echo "Your token:\n" . $jwt . "\n";
+echo '<div class="shadow p-3 mb-5 bg-body rounded"><h2>Your token:</h2>' . $jwt . '</div>';
+echo $ffoot;
 ?>
