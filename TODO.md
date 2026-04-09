@@ -8,3 +8,5 @@
 - Copy link/token
 - Allow captcha
 - l10n 
+- Suggest a tg user
+- Multiple suggestion

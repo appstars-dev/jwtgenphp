@@ -1,14 +1,11 @@
 <?php 
-// HTML Init
+ini_set ('display_errors', 1);
 $fhead='<html>
 <head>
     <meta charset="utf-8" />
     <link rel="icon" href="images/no_avatar.png" type="image/png">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>';
+    <link href="css/bootstrap.min.css" rel="stylesheet">';
 $ffoot= '
-</body>
 </html>';
 require 'bootstrap.php';
 
@@ -52,15 +49,21 @@ if ($hasroom="*"){$hasroom="";}
 //Create Link
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
 $link = CreateBaseURI($_ENV['URI_PROTO'], $jituri)."/".$hasroom."&jwt=";
-
-// Output
 if (isset($mail_wizard)){echo('');} else {
 echo $fhead;
 if (isset($jituri))
     {
-    echo '<div class="shadow p-3 mb-5 bg-body rounded"> <h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>';
+      
+    echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
+        <label class="form-label"><b>Your link:</b></label>
+        <input type="text" class="form-control name="my_input" value="'.$link . $jwt.'">
+    </form>
+    <p><a style="text-decoration:none" href="'.$link . $jwt.'">Go to meeting</a></div></p>';
     }
-echo '<div class="shadow p-3 mb-5 bg-body rounded"><h2>Your token:</h2>' . $jwt . '</div>';
+echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
+        <label class="form-label"><b>Your token:</b></label>
+        <input type="text" class="form-control name="my_input" value="'.$jwt.'">
+    </form></div>';
 echo $ffoot;
 }
 
