@@ -10,8 +10,6 @@ $fhead='<html>
 $ffoot= '
 </body>
 </html>';
-
-// need functions
 require 'bootstrap.php';
 
 // get the local secret key
@@ -67,25 +65,80 @@ echo $ffoot;
 }
 
 //For mailing
-$mail_text='<p>You were suggested to the Jitsi conference, In case you want to participate meeting, please click the button below. <br> Be careful, doublecheck the mail sender to avoid unwanted curcumstances</p>'; 
-$mail_btn= '
-<style>
+$mail_text='<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, doublecheck the mail sender to avoid unwanted curcumstances</p>'; 
+$mail_link= '<h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>';
+$mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  </head>
+  <body style="margin: 0; padding: 0">
+    <table style="background-color: #f4f4f8; height: 100%" width="100%" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr style="padding-bottom: 32px">
+          <td style="vertical-align: top; padding-top: 80px" align="center">
+            <table width="600" style="background-color: #ffffff; border-collapse: collapse; min-width: 320px; font-family: sans-serif; font-weight: 400; line-height: 140%; mso-line-height-rule: exactly; color: rgb(29, 27, 27);" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <table style="padding: 32px 32px 48px 32px" cellspacing="0" cellpadding="0">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td style="padding: 0px; width: 300px; text-align: left;" align="left">
+                                    <img style="display: block" src="https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true" alt="logo" width="64">
+                                  </td>
+                                  <td style="padding: 0px; width: 300px" align="right">
+                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="mailto:example@mail.com" target="_blank" rel="noopener">Mail back to author</a>
+                                   </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table style="padding-left: 32px;padding-right: 32px;padding-bottom: 36px;" width="600">
+                      <tbody>
+                        <tr>
+                          <td style="padding-top: 0px; padding-bottom: 40px; font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; width: 600px; height: 27px;">
+                            '.$mail_text.'
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <table cellpadding="0" cellspacing="0" style="background-color: rgb(4, 119, 4); border-radius: 12px; padding: 14px 28px;">
+                              <tbody><tr>
+                                <td valign="middle" align="center">
+                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="'. $link . $jwt .'" target="_blank" rel="noopener">
+                                    <b>Join</b>
+                                  </a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</body>
+</html>'; ?>
 
-button:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
-}
-</style>
-
-<p style="margin:20px"><button onclick="document.location=\''. $link . $jwt .'\'">Join</button></div>';
-$mail_link= '<h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>'; ?>

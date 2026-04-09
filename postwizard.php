@@ -17,7 +17,6 @@ $mail->addAddress($_POST['InputEmail']);
 
 // SMTP server configuration
 $mail->isSMTP();
-$mail->isHTML(true);
 $mail->Host = EnvIsSet('SMTP_SRV','InputSMTPURI', 'localhost');
 $mail->SMTPAuth = EnvIsSet('SMTP_AUTH','CheckSMTPAuth', true);
 $mail->Username = EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user");
@@ -31,9 +30,9 @@ $mail->SMTPDebug = 0;
 
 
 // Letter configuration
+$mail->Subject = EnvIsSet('SMTP_TOPIC','SMTPTopic', "You were suggested to Jitsi Meeting");;
+$mail->Body = $mail_tpl;
 $mail->isHTML(true);
-$mail->Subject = EnvIsSet('SMTP_TOPIC','SMTPTopic', "You were sujested to Jitsi Meeting");;
-$mail->Body = $mail_text.$mail_btn;
 $mail->AltBody = $mail_text.$mail_link;
 
 try {
