@@ -1,11 +1,14 @@
 <?php 
-ini_set ('display_errors', 1);
+// HTML Init
 $fhead='<html>
 <head>
     <meta charset="utf-8" />
     <link rel="icon" href="images/no_avatar.png" type="image/png">
-    <link href="css/bootstrap.min.css" rel="stylesheet">';
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>';
 $ffoot= '
+</body>
 </html>';
 require 'bootstrap.php';
 
@@ -50,10 +53,10 @@ if ($hasroom="*"){$hasroom="";}
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
 $link = CreateBaseURI($_ENV['URI_PROTO'], $jituri)."/".$hasroom."&jwt=";
 if (isset($mail_wizard)){echo('');} else {
-echo $fhead;
+
 if (isset($jituri))
     {
-      
+    echo $fhead;  
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>Your link:</b></label>
         <input type="text" class="form-control name="my_input" value="'.$link . $jwt.'">
@@ -142,6 +145,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
         </tr>
       </tbody>
     </table>
+    <div height="200px"></div>
 </body>
 </html>'; ?>
 
