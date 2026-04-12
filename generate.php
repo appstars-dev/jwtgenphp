@@ -7,6 +7,7 @@ $fhead='<!DOCTYPE html >
     <meta charset="utf-8">
     <link rel="icon" href="images/no_avatar.png" type="image/png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body>';
 $ffoot= '
