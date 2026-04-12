@@ -101,7 +101,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                                     <img style="display: block" src="https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true" alt="logo" width="64">
                                   </td>
                                   <td style="padding: 0px; width: 300px" align="right">
-                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="mailto:example@mail.com" target="_blank" rel="noopener">Mail back to author</a>
+                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="'.EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user").'" target="_blank" rel="noopener">Mail back to author</a>
                                    </td>
                                 </tr>
                               </tbody>
@@ -145,7 +145,6 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
         </tr>
       </tbody>
     </table>
-    <div height="200px"></div>
 </body>
 </html>'; ?>
 
