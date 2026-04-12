@@ -8,3 +8,8 @@
 - (+) Written some docs
 - (+) App icon
 - (+) JItsi URI is separate from BaseURI
+
+## alpha3
+ - (~) W3C Validated
+ - (+) Added mailing function
+ - (+) Added recaptcha
