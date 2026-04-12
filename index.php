@@ -1,17 +1,16 @@
 <?php require_once 'bootstrap.php'; ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-    <meta charset="utf-8" />
+    <title>JWT tag generator</title>
+    <meta charset="utf-8">
     <link rel="icon" href="images/no_avatar.png" type="image/png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="js/bootstrap.bundle.min.js" rel="text/javascript">
-    <link href="js/jquery-4.0.0.min.js" rel="text/javascript">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-4.0.0.min.js"></script>
     <?php addRecapthaJS($_ENV['GR_SITE_KEY'])?>
-    //Dropdown works only with cdn?
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <style>
-        #wrapper{margin: 15px}
-        .border{padding: 10px}
         <?php 
         HideDiv('JITSI_URI', '.div_uri');
         HideDiv('APP_ID', '.div_appid');
@@ -27,7 +26,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<?php echo ($_ENV['URI_PROTO'].':'. $_ENV['BASE_URI'])?>"><img src="images/no_avatar.png" width="64px"></a>
+    <a class="navbar-brand" href="<?php echo ($_ENV['URI_PROTO'].'://'. $_ENV['BASE_URI'])?>"><img id="logo" alt="logo" src="images/no_avatar.png" ></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -51,7 +50,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Your custom wishes</a>
+          <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Your custom wishes</a>
         </li>
       </ul>
     </div>
@@ -85,7 +84,7 @@
 
     <div class="mb-3">
     <label for="InputRoom" class="form-label">Room name</label>
-    <input type="text" class="form-control" name="InputRoom"  placeholder="*" aria-describedby="RoomHelp">
+    <input type="text" class="form-control" name="InputRoom" id="InputRoom" placeholder="*" aria-describedby="RoomHelp">
     <div id="RoomHelp" class="form-text">Permitted room</div>
   </div>
   <div class="mb-3 div_appid">
@@ -95,7 +94,7 @@
   </div>
   <div class="mb-3 div_secret">
     <label for="InputJSecret" class="form-label">JitsiSecret</label>
-    <input type="password" class="form-control" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHELP" <?php if (empty($_ENV['JWT_KEY'])){echo 'required';} ?> >
+    <input type="password" class="form-control" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHelp" <?php if (empty($_ENV['JWT_KEY'])){echo 'required';} ?> >
     <div id="JSecretHelp" class="form-text">Secret of your Jitsi application.</div>
   </div>
 <div class="border border-warning smtp_block">
@@ -122,7 +121,6 @@
   <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary" <?php RecaptchaElement($_ENV['GR_SITE_KEY']);?> >Generate</button>
   <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary" <?php RecaptchaElement($_ENV['GR_SITE_KEY']);?> >Mail to</button>
 </form>
-</div>
 </div>
 </body>
 </html>

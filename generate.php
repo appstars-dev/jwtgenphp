@@ -1,8 +1,10 @@
 <?php 
 // HTML Init
-$fhead='<html>
+$fhead='<!DOCTYPE html >
+<html lang=en>
 <head>
-    <meta charset="utf-8" />
+    <title>JWT tag generator</title>
+    <meta charset="utf-8">
     <link rel="icon" href="images/no_avatar.png" type="image/png">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -59,13 +61,13 @@ if (isset($jituri))
     echo $fhead;  
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>Your link:</b></label>
-        <input type="text" class="form-control name="my_input" value="'.$link . $jwt.'">
+        <input type="text" class="form-control" name="jwtlink" value="'.$link . $jwt.'">
     </form>
-    <p><a style="text-decoration:none" href="'.$link . $jwt.'">Go to meeting</a></div></p>';
+    <a style="text-decoration:none" href="'.$link . $jwt.'">Go to meeting</a></div>';
     }
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>Your token:</b></label>
-        <input type="text" class="form-control name="my_input" value="'.$jwt.'">
+        <input type="text" class="form-control" name="jwtoken" value="'.$jwt.'">
     </form></div>';
 echo $ffoot;
 }
@@ -145,6 +147,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
         </tr>
       </tbody>
     </table>
+    <table height="200px">.</div>
 </body>
 </html>'; 
 ?>
