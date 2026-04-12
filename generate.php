@@ -63,7 +63,7 @@ if (isset($jituri))
     </form>
     <p><a style="text-decoration:none" href="'.$link . $jwt.'">Go to meeting</a></div></p>';
     }
-echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
+    echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>Your token:</b></label>
         <input type="text" class="form-control name="my_input" value="'.$jwt.'">
     </form></div>';
@@ -146,5 +146,6 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
       </tbody>
     </table>
 </body>
-</html>'; ?>
+</html>'; 
+?>
 

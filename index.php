@@ -1,6 +1,4 @@
-<?php
-ini_set('display_errors', '1'); 
-require_once 'bootstrap.php';?>
+<?php require_once 'bootstrap.php'; ?>
 <html>
     <head>
     <meta charset="utf-8" />
@@ -8,16 +6,19 @@ require_once 'bootstrap.php';?>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="js/bootstrap.bundle.min.js" rel="text/javascript">
     <link href="js/jquery-4.0.0.min.js" rel="text/javascript">
+    <?php addRecapthaJS($_ENV['GR_SITE_KEY'])?>
     <style>
         #wrapper{margin: 15px}
         .border{padding: 10px}
-        <?php HideDiv('JITSI_URI', '.div_uri');?>
-        <?php HideDiv('APP_ID', '.div_appid');?>
-        <?php HideDiv('JWT_KEY', '.div_secret');?>
-        <?php HideDiv('DISABLE_SMTP', '.smtp_block');?>
-        <?php HideDiv('SMTP_SRV', '.div_msrv');?>
-        <?php HideDiv('SMTP_USR', '.div_musr');?>
-        <?php HideDiv('SMTP_PWD', '.div_mpwd');?>
+        <?php 
+        HideDiv('JITSI_URI', '.div_uri');
+        HideDiv('APP_ID', '.div_appid');
+        HideDiv('JWT_KEY', '.div_secret');
+        HideDiv('DISABLE_SMTP', '.smtp_block');
+        HideDiv('SMTP_SRV', '.div_msrv');
+        HideDiv('SMTP_USR', '.div_musr');
+        HideDiv('SMTP_PWD', '.div_mpwd');
+        ?>
     </style>
     </head>
     <body>
@@ -114,10 +115,10 @@ require_once 'bootstrap.php';?>
     <label for="InputSMTPPassword" class="form-label">SMTP server password</label>
     <input type="password" class="form-control" name="InputSMTPPassword" id="InputSMTPPassword">
   </div>
-
 </div>
-  <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary">Generate</button>
-  <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary">Mail to</button>
+  <?php Recaptchadiv($_ENV['GR_SITE_KEY']); ?><br>
+  <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary" <?php RecaptchaElement($_ENV['GR_SITE_KEY']);?> >Generate</button>
+  <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary" <?php RecaptchaElement($_ENV['GR_SITE_KEY']);?> >Mail to</button>
 </form>
 </div>
 </div>

@@ -25,12 +25,12 @@ $mail->From = EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user");
 $mail->SMTPSecure = 'ssl';
 $mail->Port = EnvIsSet('SMTP_PORT','', 587);
 $mail->SMTPKeepAlive = true;
-$mail->SMTPDebug = 0;
+$mail->SMTPDebug = 2;
 
 
 
 // Letter configuration
-$mail->Subject = EnvIsSet('SMTP_TOPIC','SMTPTopic', "You were suggested to Jitsi Meeting");;
+$mail->Subject = EnvIsSet('SMTP_TOPIC','SMTPTopic', "You were suggested to Jitsi Meeting");
 $mail->Body = $mail_tpl;
 $mail->isHTML(true);
 $mail->AltBody = $mail_text.$mail_link;
