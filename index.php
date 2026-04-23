@@ -9,7 +9,7 @@
     <link href="css/main.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-4.0.0.min.js"></script>
-    <?php addRecapthaJS($_ENV['GR_SITE_KEY'])?>
+    <?php addRecapthaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
     <style>
         <?php 
         HideDiv('JITSI_URI', '.div_uri');
@@ -26,7 +26,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<?php echo ($_ENV['URI_PROTO'].'://'. $_ENV['BASE_URI'])?>"><img id="logo" alt="logo" src="images/no_avatar.png" ></a>
+    <a class="navbar-brand" href="<?php echo (EnvIsSet('URI_PROTO','','https').'://'. EnvIsSet('BASE_URI','','localhost'))?>"><img id="logo" alt="logo" src="images/no_avatar.png" ></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -117,9 +117,9 @@
     <input type="password" class="form-control" name="InputSMTPPassword" id="InputSMTPPassword">
   </div>
 </div>
-  <?php Recaptchadiv($_ENV['GR_SITE_KEY']); ?><br>
-  <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary" <?php RecaptchaElement($_ENV['GR_SITE_KEY']);?> >Generate</button>
-  <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary" <?php RecaptchaElement($_ENV['GR_SITE_KEY']);?> >Mail to</button>
+  <?php Recaptchadiv(EnvIsSet('GR_SITE_KEY','','')); ?><br>
+  <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary" <?php RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> >Generate</button>
+  <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary" <?php RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> >Mail to</button>
 </form>
 </div>
 </body>

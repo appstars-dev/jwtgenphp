@@ -54,7 +54,7 @@ $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 if ($hasroom="*"){$hasroom="";}
 //Create Link
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
-$link = CreateBaseURI($_ENV['URI_PROTO'], $jituri)."/".$hasroom."&jwt=";
+$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$hasroom."&jwt=";
 if (isset($mail_wizard)){echo('');} else {
 
 if (isset($jituri))
@@ -78,7 +78,7 @@ $mail_text='<p>You were suggested to the Jitsi conference. In case you want to p
 $mail_link= '<h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>';
 $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
-<html>
+<html lang=en>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,10 +100,10 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                             <table>
                               <tbody>
                                 <tr>
-                                  <td style="padding: 0px; width: 300px; text-align: left;" align="left">
+                                  <td style="padding: 0; width: 300px; text-align: left;" align="left">
                                     <img style="display: block" src="https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true" alt="logo" width="64">
                                   </td>
-                                  <td style="padding: 0px; width: 300px" align="right">
+                                  <td style="padding: 0; width: 300px" align="right">
                                    <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="'.EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user").'" target="_blank" rel="noopener">Mail back to author</a>
                                    </td>
                                 </tr>
@@ -120,7 +120,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                     <table style="padding-left: 32px;padding-right: 32px;padding-bottom: 36px;" width="600">
                       <tbody>
                         <tr>
-                          <td style="padding-top: 0px; padding-bottom: 40px; font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; width: 600px; height: 27px;">
+                          <td style="padding-top: 0; padding-bottom: 40px; font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; width: 600px; height: 27px;">
                             '.$mail_text.'
                           </td>
                         </tr>
@@ -148,7 +148,6 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
         </tr>
       </tbody>
     </table>
-    <table height="200px">.</div>
 </body>
 </html>'; 
 ?>
