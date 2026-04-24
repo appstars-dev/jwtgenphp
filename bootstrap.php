@@ -16,7 +16,7 @@ function base64UrlEncode(string $text)
     );
 }
 
-function CreateBaseURI (string $proto, string $uri)
+function CreateBaseURI (string $proto, string $uri): string
 {
 if ($proto != "http" or $proto != "https") {
     $proto ="https://";
@@ -25,29 +25,30 @@ if ($proto != "http" or $proto != "https") {
         {
             $proto=$proto.'://';
         }
-if (!isset($uri)) {$proto="";};
-    $text=$proto.$uri;
-        return $text;
+if (!isset($uri)) $proto="";
+    return $proto.$uri;
 }
 
 function EnvIsSet (string $env, string $post, string $default) {
 $value = $default;
-if (empty($_ENV[$env]) or strcmp($_ENV[$env], "") == 0)
+if (empty($_ENV[$env]) or (strcmp($_ENV[$env], "") == 0))
     {
-        if (empty($_POST[$post]) or strcmp($_POST[$post], "") == 0){$value = $default;} else {$value=$_POST[$post];}
+        $value = (empty($_POST[$post]) or strcmp($_POST[$post], "") == 0) ? $default : $_POST[$post];
     } else {$value=$_ENV[$env];}
-    return $value;
+    if (isset($value)) {
+        return $value;
+    }
 }
 
 function HideDiv(string $env, string $css_class){
     if($_ENV[$env] !== null and strcmp($_ENV[$env], "") == 1){echo $css_class."{display:none;}";}
 }
 
-function addRecapthaJS(string $key){
+function addRecaptchaJS(string $key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key){
     echo '<script src="https://www.google.com/recaptcha/api.js?render='.$key.'" async defer></script>';
     if (EnvIsSet('GR_VERSION','',3) == "3"){
-     echo '<script>
+        echo '<script>
       function onClick(e) {
         e.preventDefault();
         grecaptcha.ready(function() {
@@ -55,8 +56,8 @@ function addRecapthaJS(string $key){
           });
         });
       }
-  </script>';};
-  };
+  </script>';}
+    }
 }
 function RecaptchaElement($key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key){
@@ -69,4 +70,3 @@ function Recaptchadiv($key){
     echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
     }
 }
-?>

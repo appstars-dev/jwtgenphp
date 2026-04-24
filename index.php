@@ -9,7 +9,7 @@
     <link href="css/main.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-4.0.0.min.js"></script>
-    <?php addRecapthaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
+    <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
     <style>
         <?php 
         HideDiv('JITSI_URI', '.div_uri');
@@ -44,7 +44,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="README.md">Description</a></li>
-            <li><a class="dropdown-item" href="https://github.com/appstars-dev/jwtgenphp">Github link</a></li>
+            <li><a class="dropdown-item" href="https://github.com/appstars-dev/jwtgenphp">GitHub link</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Authors</a></li>
           </ul>
@@ -122,5 +122,6 @@
   <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary" <?php RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> >Mail to</button>
 </form>
 </div>
+    <div id="footer">JWTGenPHP &copy;2026 AppStars. MIT and other licenses</div>
 </body>
 </html>

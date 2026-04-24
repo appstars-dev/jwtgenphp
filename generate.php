@@ -150,5 +150,5 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
     </table>
 </body>
 </html>'; 
-?>
+
 

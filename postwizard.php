@@ -1,11 +1,17 @@
 <?php
 $mail_wizard = true;
+$mail_tpl='';
+$mail_text='';
+$mail_link = '';
 
 // Autoloader
 if (file_exists('vendor/autoload.php')) {
     require_once('vendor/autoload.php');
 }
+
+if (file_exists('generate.php')) {
     require_once('generate.php');
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,7 +19,11 @@ use PHPMailer\PHPMailer\Exception;
 
 // Initialize the PHPMailer
 $mail = new PHPMailer(true);
-$mail->addAddress($_POST['InputEmail']);
+try {
+    $mail->addAddress($_POST['InputEmail']);
+} catch (Exception $e) {
+
+}
 
 // SMTP server configuration
 $mail->isSMTP();
@@ -32,7 +42,7 @@ $mail->SMTPDebug = 2;
 // Letter configuration
 $mail->Subject = EnvIsSet('SMTP_TOPIC','SMTPTopic', "You were suggested to Jitsi Meeting");
 $mail->Body = $mail_tpl;
-$mail->isHTML(true);
+$mail->isHTML();
 $mail->AltBody = $mail_text.$mail_link;
 
 try {
@@ -41,4 +51,3 @@ try {
 } catch (Exception $e) {
     echo "Error: " . $mail->ErrorInfo;
 }
-?>
