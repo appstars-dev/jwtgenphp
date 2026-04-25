@@ -11,5 +11,9 @@
 
 ## alpha3
  - (~) W3C Validated
+ - (~) Jetbrains validated
  - (+) Added mailing function
  - (+) Added recaptcha
+ - (!) Match token with mm plugin
+ - (!) Default room is now public
+ - (+) Display version on the main page

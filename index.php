@@ -1,4 +1,6 @@
-<?php require_once 'bootstrap.php'; ?>
+<?php require_once 'bootstrap.php';
+$version="alpha3"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -122,6 +124,6 @@
   <button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary" <?php RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> >Mail to</button>
 </form>
 </div>
-    <div id="footer">JWTGenPHP Alpha3 &copy;2026 AppStars. MIT and other licenses</div>
+    <div id="footer">JWTGenPHP <?php echo $version.' &copy;'.date("Y"); ?> AppStars. MIT and other licenses</div>
 </body>
 </html>
