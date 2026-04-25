@@ -36,7 +36,7 @@ $payload = json_encode([
         "email" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
         "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'))),
     'moderator' => EnvIsSet('','CheckModerator', false),
-    'room' => EnvIsSet('','InputRoom', '*')
+    'room' => EnvIsSet('','InputRoom', 'public')
 ]);
 
 // Encode Header
@@ -54,8 +54,7 @@ $base64UrlSignature = base64UrlEncode($signature);
 // Create JWT
 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
-$hasroom=EnvIsSet("","InputRoom", "*");
-if ($hasroom="*"){$hasroom="";}
+$hasroom=EnvIsSet("","InputRoom", "public");
 //Create Link
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
 $link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$hasroom."?jwt=";

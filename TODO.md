@@ -7,3 +7,6 @@
 - l10n 
 - Suggest a tg user
 - Multiple suggestion
+- Generate random room name
+- Limited and unlimited room token
+- Crop ports of URL

@@ -84,7 +84,7 @@
 
     <div class="mb-3">
     <label for="InputRoom" class="form-label">Room name</label>
-    <input type="text" class="form-control" name="InputRoom" id="InputRoom" placeholder="*" aria-describedby="RoomHelp">
+    <input type="text" class="form-control" name="InputRoom" id="InputRoom" placeholder="public" aria-describedby="RoomHelp">
     <div id="RoomHelp" class="form-text">Permitted room</div>
   </div>
   <div class="mb-3 div_appid">
