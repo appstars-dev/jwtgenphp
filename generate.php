@@ -26,14 +26,17 @@ $header = json_encode([
 
 // Create the token payload
 $payload = json_encode([
+    'aud' => EnvIsSet('APP_ID','InputAppid', ''),
+    'iss' => EnvIsSet('APP_ID','InputAppid', ''),
+    'sub' => EnvIsSet('JITSI_URI','InputURI', ''),
+    'exp' => time() + EnvIsSet('EXPIRES','ExpirationTime', '30')*60,
+    'context' =>array(
     'user_id' => array(
         "name" => EnvIsSet('','InputName', 'Anonimous'),
-        "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
-        "email" => EnvIsSet('','InputEmail', 'anonimous@email.com')),
+        "email" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
+        "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'))),
     'moderator' => EnvIsSet('','CheckModerator', false),
-    'sub' => EnvIsSet('JITSI_URI','InputURI', ''),
-    'room' => EnvIsSet('','InputRoom', '*'),
-    'exp' => time() + EnvIsSet('EXPIRES','ExpirationTime', '30')*60
+    'room' => EnvIsSet('','InputRoom', '*')
 ]);
 
 // Encode Header
@@ -51,10 +54,11 @@ $base64UrlSignature = base64UrlEncode($signature);
 // Create JWT
 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
+$hasroom=EnvIsSet("","InputRoom", "*");
 if ($hasroom="*"){$hasroom="";}
 //Create Link
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
-$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$hasroom."&jwt=";
+$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$hasroom."?jwt=";
 if (isset($mail_wizard)){echo('');} else {
 
 if (isset($jituri))
