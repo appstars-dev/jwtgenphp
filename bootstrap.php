@@ -48,7 +48,7 @@ function addRecaptchaJS(string $key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key){
     echo '<script src="https://www.google.com/recaptcha/api.js?render='.$key.'" async defer></script>';
     if (EnvIsSet('GR_VERSION','',3) == "3"){
-        echo '<script>
+     echo '<script>
       function onClick(e) {
         e.preventDefault();
         grecaptcha.ready(function() {
@@ -70,3 +70,19 @@ function Recaptchadiv($key){
     echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
     }
 }
+function ini_local(string $string){
+$ini_array = parse_ini_file("locale.ini", true);
+$key = array_search($string, $ini_array);
+print_r($ini_array);
+$array = array(0 => 'blue', 1 => 'red', 2 => 'green', 3 => 'red');
+$key_t = array_search('green', $array); // $key = 2;
+$key_t = array_search('red', $array); // $key = 1;
+return $key_t.$key.$string;
+
+}
+function ini_l10n(string $string){
+    $ini = new \Jelix\IniFile\IniModifier('locale.ini');
+    
+
+}
+?>

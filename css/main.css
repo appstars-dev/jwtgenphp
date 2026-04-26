@@ -1,8 +1,15 @@
 #wrapper{margin: 15px}
 .border{padding: 10px}
 #logo{width: 64px;}
+#debug
+{
+    position: absolute;
+    opacity: 90%;
+    z-index: 999;
+}
 #footer {
     text-align: center;
     color: #cccccc;
     text-shadow: 0 0 3px rgba(128, 128, 128, 0.8);
     font-size: small}
+    

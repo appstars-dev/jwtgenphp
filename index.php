@@ -1,8 +1,13 @@
+<div class="alert alert-danger" role="alert">
 <?php require_once 'bootstrap.php';
-$version="alpha3"; ?>
+$L10N_CODE=EnvIsSet('L10N_CODE','','en');
+require_once 'public.conf.php';
+$version="alpha3"; 
+?>
 
+</div>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $L10N_CODE; ?>">
     <head>
     <title>JWT tag generator</title>
     <meta charset="utf-8">
@@ -25,10 +30,14 @@ $version="alpha3"; ?>
     </style>
     </head>
     <body>
-
+      <!-- DEBUG START -->
+<div id="debug" class="alert alert-danger" role="alert">
+  <?php if(EnvIsSet("DEBUG_MODE", '', false) == true){echo ini_local("Debug enabled"); }?>
+</div>
+<!-- DEBUG END -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<?php echo (EnvIsSet('URI_PROTO','','https').'://'. EnvIsSet('BASE_URI','','localhost'))?>"><img id="logo" alt="logo" src="images/no_avatar.png" ></a>
+  <a class="navbar-brand" href="<?php echo (EnvIsSet('URI_PROTO','','https').'://'. EnvIsSet('BASE_URI','','localhost'))?>"><img id="logo" alt="logo" src="images/no_avatar.png" ></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
