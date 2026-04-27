@@ -2,7 +2,7 @@
 <?php require_once 'bootstrap.php';
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 require_once 'public.conf.php';
-$version="alpha3"; 
+$version="beta1";
 ?>
 
 </div>
@@ -37,7 +37,7 @@ $version="alpha3";
 <!-- DEBUG END -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-  <a class="navbar-brand" href="<?php echo (EnvIsSet('URI_PROTO','','https').'://'. EnvIsSet('BASE_URI','','localhost'))?>"><img id="logo" alt="logo" src="images/no_avatar.png" ></a>
+  <a class="navbar-brand" href="<?php echo (EnvIsSet('URI_PROTO','','https').'://'. EnvIsSet('BASE_URI','','localhost'))?>"><img id="logo" alt="logo" src="<?php echo EnvIsSet('OEM_LOGO','','images/no_avatar.png') ?>" ></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -77,7 +77,7 @@ echo $ffoot;
 }
 
 //For mailing
-$mail_text='<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, doublecheck the mail sender to avoid unwanted curcumstances</p>'; 
+$mail_text='<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>';
 $mail_link= '<h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>';
 $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
@@ -104,7 +104,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                               <tbody>
                                 <tr>
                                   <td style="padding: 0; width: 300px; text-align: left;" align="left">
-                                    <img style="display: block" src="https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true" alt="logo" width="64">
+                                    <img style="display: block" src="'.EnvIsSet('MAIL_LOGO','','https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true').'" alt="logo" width="64">
                                   </td>
                                   <td style="padding: 0; width: 300px" align="right">
                                    <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="'.EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user").'" target="_blank" rel="noopener">Mail back to author</a>
