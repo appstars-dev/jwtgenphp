@@ -10,5 +10,8 @@
 - Generate random room name
 - Limited and unlimited room token
 - Crop ports of URL
-- Abilily to load logo from url set in env or use default onne from baseurl
+- Ability to load logo from url set in env or use default onne from baseurl
 - Hide mailing button and fields if mailing function disabled
+- Random person generator
+- Mobile view
+- New default room from settings
