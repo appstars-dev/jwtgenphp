@@ -70,7 +70,8 @@ function Recaptchadiv($key){
     echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
     }
 }
-function ini_local(string $string){
+function ini_local(string $string): string
+{
 $ini_array = parse_ini_file("locale.ini", true);
 $key = array_search($string, $ini_array);
 print_r($ini_array);
@@ -85,4 +86,3 @@ function ini_l10n(string $string){
     
 
 }
-?>

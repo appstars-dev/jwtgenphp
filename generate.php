@@ -14,7 +14,8 @@ $ffoot= '
 </body>
 </html>';
 require 'bootstrap.php';
-
+if (EnvIsSet('', 'CheckWildcard', false)){$room= '*';} else {
+    EnvIsSet('', 'InputRoom', 'public');}
 // get the local secret key
 $secret = EnvIsSet('JWT_KEY','InputJSecret', 'nosecret');
 
@@ -36,7 +37,7 @@ $payload = json_encode([
         "email" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
         "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'))),
     'moderator' => EnvIsSet('','CheckModerator', false),
-    'room' => EnvIsSet('','InputRoom', 'public')
+    'room' => $room,
 ]);
 
 // Encode Header
@@ -67,10 +68,10 @@ if (isset($jituri))
         <label class="form-label"><b>Your link:</b></label>
         <input type="text" class="form-control" name="jwtlink" value="'.$link . $jwt.'">
     </form>
-    <a style="text-decoration:none" href="'.$link . $jwt.'">Go to meeting</a></div>';
+    <a style="text-decoration:none" href="'.$link . $jwt.'">'.ini_local("Go to meeting").'</a></div>';
     }
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>Your token:</b></label>
+        <label class="form-label"><b>'.ini_local("Your token").':</b></label>
         <input type="text" class="form-control" name="jwtoken" value="'.$jwt.'">
     </form></div>';
 echo $ffoot;
