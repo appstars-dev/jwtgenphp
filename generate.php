@@ -61,19 +61,21 @@ $jituri = EnvIsSet('JITSI_URI','InputURI','');
 $link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$hasroom."?jwt=";
 if (isset($mail_wizard)){echo('');} else {
 
-if (isset($jituri))
-    {
-    echo $fhead;  
-    echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
+if (isset($jituri)) {
+    echo $fhead;
+    if (strcmp(EnvIsSet('RESULT', '', 'both'), "token") !== 0) {
+        echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>Your link:</b></label>
-        <input type="text" class="form-control" name="jwtlink" value="'.$link . $jwt.'">
+        <input type="text" class="form-control" name="jwtlink" value="' . $link . $jwt . '">
     </form>
-    <a style="text-decoration:none" href="'.$link . $jwt.'">'.ini_local("Go to meeting").'</a></div>';
+    <a style="text-decoration:none" href="' . $link . $jwt . '">' . ini_local("Go to meeting") . '</a></div>';
     }
+}
+    if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local("Your token").':</b></label>
         <input type="text" class="form-control" name="jwtoken" value="'.$jwt.'">
-    </form></div>';
+    </form></div>';}
 echo $ffoot;
 }
 
@@ -153,6 +155,6 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
       </tbody>
     </table>
 </body>
-</html>'; 
+</html>';
 
 
