@@ -82,7 +82,5 @@ return $key_t.$key.$string;
 
 }
 function ini_l10n(string $string){
-    $ini = new \Jelix\IniFile\IniModifier('locale.ini');
-    
-
+    $ini = new IniModifier('locale.ini');
 }

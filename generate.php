@@ -17,7 +17,7 @@ require 'bootstrap.php';
 if (EnvIsSet('', 'CheckWildcard', false)){$room= '*';} else {
     EnvIsSet('', 'InputRoom', 'public');}
 // get the local secret key
-$secret = EnvIsSet('JWT_KEY','InputJSecret', 'nosecret');
+$secret = EnvIsSet('JWT_KEY','InputJSecret', 'no secret');
 
 // Create the token header
 $header = json_encode([
