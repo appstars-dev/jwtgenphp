@@ -1,11 +1,8 @@
-<div class="alert alert-danger" role="alert">
 <?php require_once 'bootstrap.php';
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 require_once 'public.conf.php';
 $version="beta1";
 ?>
-
-</div>
 <!DOCTYPE html>
 <html lang="<?php echo $L10N_CODE; ?>">
     <head>
