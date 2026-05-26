@@ -33,9 +33,9 @@ $payload = json_encode([
     'exp' => time() + EnvIsSet('EXPIRES','ExpirationTime', '30')*60,
     'context' =>array(
     'user_id' => array(
-        "name" => EnvIsSet('','InputName', 'Anonimous'),
-        "email" => EnvIsSet('','InputEmail', 'anonimous@email.com'),
-        "id" => EnvIsSet('','InputEmail', 'anonimous@email.com'))),
+        "name" => EnvIsSet('','InputName', 'Anonymous'),
+        "email" => EnvIsSet('','InputEmail', 'anonymous@email.com'),
+        "id" => EnvIsSet('','InputEmail', 'anonymous@email.com'))),
     'moderator' => EnvIsSet('','CheckModerator', false),
     'room' => $room,
 ]);

@@ -74,11 +74,11 @@ function ini_local(string $string): string
 {
 $ini_array = parse_ini_file("locale.ini", true);
 $key = array_search($string, $ini_array);
-print_r($ini_array);
+# print_r($ini_array);
 $array = array(0 => 'blue', 1 => 'red', 2 => 'green', 3 => 'red');
 $key_t = array_search('green', $array); // $key = 2;
 $key_t = array_search('red', $array); // $key = 1;
-return $key_t.$key.$string;
+return $string;
 
 }
 function ini_l10n(string $string){
