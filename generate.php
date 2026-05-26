@@ -5,9 +5,11 @@ $fhead='<!DOCTYPE html >
 <head>
     <title>JWT tag generator</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/no_avatar.png" type="image/png">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
+        <link rel="icon" href="images/no_avatar.png" type="image/png">
+        <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
 </head>
 <body>';
 $ffoot= '
