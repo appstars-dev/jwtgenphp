@@ -8,6 +8,7 @@ $version="beta1";
     <head>
         <title><?php echo ini_local("JWT token generator");?></title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
         <link rel="icon" href="images/no_avatar.png" type="image/png">
         <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +67,7 @@ $version="beta1";
   </div>
 </nav>
 
-<div id="wrapper">
+<div id="wrapper" class="h-100">
 
 <form action="#" enctype="multipart/form-data" method="POST" >
     <div class="mb-3">
@@ -137,6 +138,6 @@ $version="beta1";
     <!--<button type="submit" formaction="postwizard.php" name="submit_post" value="submit_3" class="btn btn-warning btn-lg" <?php # RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> ><?php # echo ini_local("Random"); ?></button> -->
 </form>
 </div>
-    <div id="footer">JWTGenPHP <?php echo $version.' &copy;'.date("Y"); ?> AppStars. MIT and other licenses</div>
+    <div id="footer">JWTGenPHP <?php echo $version.' &copy;'.date("Y"); ?> AppStars.<br> MIT and other licenses</div>
 </body>
 </html>
