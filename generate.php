@@ -14,8 +14,11 @@ $ffoot= '
 </body>
 </html>';
 require 'bootstrap.php';
-if (EnvIsSet('', 'CheckWildcard', false)){$room= '*';} else {
-    EnvIsSet('', 'InputRoom', 'public');}
+if (EnvIsSet('', 'CheckWildcard', false))
+{$room= '*';}
+else
+{$room=EnvIsSet('', 'InputRoom', 'public');}
+
 // get the local secret key
 $secret = EnvIsSet('JWT_KEY','InputJSecret', 'no secret');
 

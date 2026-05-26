@@ -27,7 +27,11 @@ $version="beta1";
     </style>
     </head>
     <body>
-
+    <!-- DEBUG START -->
+    <div id="debug" style="display: none" class="alert alert-danger" role="alert">
+        <?php if(EnvIsSet("DEBUG_MODE", '', false)){echo ini_local('Debug enabled'); }?>
+    </div>
+    <!-- DEBUG END -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   <a class="navbar-brand" href="<?php echo (EnvIsSet('URI_PROTO','','https').'://'. EnvIsSet('BASE_URI','','localhost'))?>"><img id="logo" alt="logo" src="<?php echo EnvIsSet('OEM_LOGO','','images/no_avatar.png') ?>" ></a>
