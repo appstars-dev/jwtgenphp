@@ -6,11 +6,12 @@ $version="beta1";
 <!DOCTYPE html>
 <html lang="<?php echo $L10N_CODE; ?>">
     <head>
-    <title><?php echo ini_local("JWT token generator");?></title>
-    <meta charset="utf-8">
-    <link rel="icon" href="images/no_avatar.png" type="image/png">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+        <title><?php echo ini_local("JWT token generator");?></title>
+        <meta charset="utf-8">
+        <link rel="icon" href="images/no_avatar.png" type="image/png">
+        <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-4.0.0.min.js"></script>
     <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
