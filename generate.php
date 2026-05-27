@@ -10,17 +10,18 @@ $fhead='<!DOCTYPE html >
         <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
+        <script src="js/main.js"></script>
 </head>
 <body>';
 $ffoot= '
 </body>
 </html>';
 require 'bootstrap.php';
+$joinroom=EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
 if (EnvIsSet('', 'CheckWildcard', false))
 {$room= '*';}
 else
-{$room=EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');}
-
+{$room=$joinroom;}
 // get the local secret key
 $secret = EnvIsSet('JWT_KEY','InputJSecret', 'no secret');
 
@@ -62,23 +63,27 @@ $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
 //Create Link
 $jituri = EnvIsSet('JITSI_URI','InputURI','');
-$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$room."?jwt=";
+$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$joinroom."?jwt=";
 if (isset($mail_wizard)){echo('');} else {
 
 if (isset($jituri)) {
     echo $fhead;
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "token") !== 0) {
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>Your link:</b></label>
-        <input type="text" class="form-control" name="jwtlink" value="' . $link . $jwt . '">
+        <label class="form-label"><b>'.ini_local("Your link").': </b></label><div class="input-group mb-3">
+        <input type="text" class="form-control" id="jwtlink" name="jwtlink" value="' . $link . $jwt . '">
+        <button class="btn btn-outline-secondary" onclick="copyJWTLink()">Copy Text</button>
+        </div>
     </form>
     <a style="text-decoration:none" href="' . $link . $jwt . '">' . ini_local("Go to meeting") . '</a></div>';
     }
 }
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local("Your token").':</b></label>
-        <input type="text" class="form-control" name="jwtoken" value="'.$jwt.'">
+        <label class="form-label"><b>'.ini_local("Your token").':</b></label><div class="input-group mb-3">
+        <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="'.$jwt.'">
+        <button class="btn btn-outline-secondary" onclick="copyJWToken()">Copy Text</button>
+        </div>
     </form></div>';}
 echo $ffoot;
 }
