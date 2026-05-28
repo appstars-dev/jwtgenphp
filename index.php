@@ -13,8 +13,10 @@ $version="beta1";
         <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-4.0.0.min.js"></script>
+        <link href="css/iconfont.css" rel="stylesheet">
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-4.0.0.min.js"></script>
+        <script src="js/main.js"></script>
     <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
     <style>
         <?php 
@@ -72,12 +74,16 @@ $version="beta1";
 <form action="#" enctype="multipart/form-data" method="POST" >
     <div class="mb-3">
     <label for="InputName" class="form-label"><?php echo ini_local('Person name');?></label>
-    <input type="text" class="form-control form-control-lg" name="InputName" id="InputName" placeholder="<?php echo ini_local('Anonymous'); ?>" aria-describedby="NameHelp">
+        <div class="input-group mb-3">
+    <input type="text" class="form-control form-control-lg" name="InputName" id="InputName" placeholder="<?php echo ini_local('Anonymous'); ?>" aria-describedby="NameHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="randomName()"></button>
+        </div>
     <div id="NameHelp" class="form-text"><?php echo ini_local('Participant\'s name'); ?></div>
   </div>
   <div class="mb-3">
     <label for="InputEmail" class="form-label"><?php echo ini_local('Email address');?></label>
-    <input type="email" class="form-control form-control-lg" name="InputEmail" id="InputEmail" aria-describedby="emailHelp" required>
+      <div class="input-group mb-3">
+    <input type="email" class="form-control form-control-lg" name="InputEmail" id="InputEmail" aria-describedby="emailHelp" required><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="randomEmail()"></button>
+      </div>
     <div id="emailHelp" class="form-text"><?php echo ini_local('Whom you want to meet'); ?></div>
   </div>
     <div class="mb-3 form-check">
@@ -94,7 +100,9 @@ $version="beta1";
 
     <div class="mb-3">
     <label for="InputRoom" class="form-label"><?php echo ini_local('Room name'); ?></label>
-    <input type="text" class="form-control form-control-lg" name="InputRoom" id="InputRoom" placeholder="<?php echo EnvIsSet('DEFAULT_ROOM','','public')?>" aria-describedby="RoomHelp">
+        <div class="input-group mb-3">
+    <input type="text" class="form-control form-control-lg" name="InputRoom" id="InputRoom" placeholder="<?php echo EnvIsSet('DEFAULT_ROOM','','public')?>" aria-describedby="RoomHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="generateUUID()"></button><button type="button" class="btn btn-outline-primary feather icon-copy" onclick="copyRoom()"></button>
+        </div>
     <div id="RoomHelp" class="form-text"><?php echo ini_local('Permitted room');?></div>
   </div>
     <div class="mb-3 form-check">
@@ -135,7 +143,6 @@ $version="beta1";
   <?php Recaptchadiv(EnvIsSet('GR_SITE_KEY','','')); ?><br>
   <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary" <?php RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> ><?php echo ini_local("Generate"); ?></button>
   <?php if (!EnvIsSet('DISABLE_SMTP','','false')){ echo '<button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary"'. RecaptchaElement(EnvIsSet('GR_SITE_KEY','','')).'>'.ini_local("Mail to"). '</button>'; } ?>
-    <!--<button type="submit" formaction="postwizard.php" name="submit_post" value="submit_3" class="btn btn-warning btn-lg" <?php # RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> ><?php # echo ini_local("Random"); ?></button> -->
 </form>
 </div>
     <div id="footer">JWTGenPHP <?php echo $version.' &copy;'.date("Y"); ?> AppStars.<br> MIT and other licenses</div>

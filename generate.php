@@ -73,7 +73,7 @@ if (isset($jituri)) {
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local("Your link").': </b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtlink" name="jwtlink" value="' . $link . $jwt . '">
-        <button class="btn btn-outline-secondary feather icon-copy" onclick="copyJWTLink()"></button>
+        <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWTLink()"></button>
         </div>
     </form>
     <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local("Go to meeting") . '</a></div>';
@@ -83,7 +83,7 @@ if (isset($jituri)) {
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local("Your token").':</b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="'.$jwt.'">
-        <button class="btn btn-outline-secondary feather icon-copy" onclick="copyJWToken()"></button>
+        <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWToken()"></button>
         </div>
     </form></div>';}
 echo $ffoot;
