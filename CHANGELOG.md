@@ -24,3 +24,4 @@
  - (+) Wildcard room
  - (+) Debug mode
  - (~) Hide mailing button if mailing function is disabled
+ - (+) Ability to copy link/token

@@ -10,6 +10,7 @@ $fhead='<!DOCTYPE html >
         <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
+        <link href="css/iconfont.css" rel="stylesheet">
         <script src="js/main.js"></script>
 </head>
 <body>';
@@ -72,17 +73,17 @@ if (isset($jituri)) {
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local("Your link").': </b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtlink" name="jwtlink" value="' . $link . $jwt . '">
-        <button class="btn btn-outline-secondary" onclick="copyJWTLink()">Copy Text</button>
+        <button class="btn btn-outline-secondary feather icon-copy" onclick="copyJWTLink()"></button>
         </div>
     </form>
-    <a style="text-decoration:none" href="' . $link . $jwt . '">' . ini_local("Go to meeting") . '</a></div>';
+    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local("Go to meeting") . '</a></div>';
     }
 }
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local("Your token").':</b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="'.$jwt.'">
-        <button class="btn btn-outline-secondary" onclick="copyJWToken()">Copy Text</button>
+        <button class="btn btn-outline-secondary feather icon-copy" onclick="copyJWToken()"></button>
         </div>
     </form></div>';}
 echo $ffoot;
