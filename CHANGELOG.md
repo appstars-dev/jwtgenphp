@@ -19,6 +19,7 @@
  - (+) Display version on the main page
 
 ## beta1
+ - (!) Corrected moderator rights
  - (~) Mobile view fix
  - (+) Result view link/token or both
  - (+) Wildcard room

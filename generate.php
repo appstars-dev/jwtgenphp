@@ -43,7 +43,7 @@ $payload = json_encode([
         "name" => EnvIsSet('','InputName', 'Anonymous'),
         "email" => EnvIsSet('','InputEmail', 'anonymous@email.com'),
         "id" => EnvIsSet('','InputEmail', 'anonymous@email.com'))),
-    'moderator' => EnvIsSet('','CheckModerator', false),
+    'moderator' => EnvIsSet('','CheckModerator', false) === "on",
     'room' => $room,
 ]);
 
