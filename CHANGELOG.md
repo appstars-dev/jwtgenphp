@@ -27,3 +27,7 @@
  - (~) Hide mailing button if mailing function is disabled
  - (+) Ability to copy link/token
  - (+) Random person generator
+
+## beta2
+ - (~) Code review 
+ - (+) Added useful links to the menu

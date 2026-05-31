@@ -47,9 +47,17 @@ $version="beta1";
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#"><?php echo ini_local("Home")?></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://jitsi.org/"><?php echo ini_local("Jitsi")?></a>
-        </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php echo ini_local("Jitsi"); ?>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="https://jitsi.org/"><?php echo ini_local("Home page")?></a></li>
+                  <li><a class="dropdown-item" href="https://github.com/jitsi/docker-jitsi-meet/releases"><?php echo ini_local("Jitsi for Docker")?></a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="https://jitsi.support/wiki/install-jitsi-meet-docker/"><?php echo ini_local("Support");?></a></li>
+              </ul>
+          </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <?php echo ini_local("About"); ?>
