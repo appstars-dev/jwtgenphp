@@ -4,7 +4,6 @@ $mail_tpl='';
 $mail_text='';
 $mail_link = '';
 
-// Autoloader
 if (file_exists('vendor/autoload.php')) {
     require_once('vendor/autoload.php');
 }
@@ -15,7 +14,6 @@ if (file_exists('generate.php')) {
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
 
 // Initialize the PHPMailer
 $mail = new PHPMailer(true);
@@ -36,8 +34,6 @@ $mail->SMTPSecure = 'ssl';
 $mail->Port = EnvIsSet('SMTP_PORT','', 587);
 $mail->SMTPKeepAlive = true;
 $mail->SMTPDebug = 2;
-
-
 
 // Letter configuration
 $mail->Subject = EnvIsSet('SMTP_TOPIC','SMTPTopic', "You were suggested to Jitsi Meeting");

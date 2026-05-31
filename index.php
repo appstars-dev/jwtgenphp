@@ -11,12 +11,12 @@ $version="beta1";
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
         <link rel="icon" href="images/no_avatar.png" type="image/png">
         <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link href="css/iconfont.css" rel="stylesheet">
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/jquery-4.0.0.min.js"></script>
-        <script src="js/main.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/iconfont.css">
+        <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="js/jquery-4.0.0.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
     <style>
         <?php 
