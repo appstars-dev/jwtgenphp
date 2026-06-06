@@ -14,6 +14,9 @@ $version="beta1";
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/iconfont.css">
+        <link rel="stylesheet" href="css/sociallyiconic.css">
+        <link rel="stylesheet" href="css/sociallyiconic-codes.css">
+        <link rel="stylesheet" href="css/sociallyiconic-embedded.css">
         <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="js/jquery-4.0.0.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
