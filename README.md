@@ -10,4 +10,7 @@ Appstars community (<foss@appstars.ru>)
 Under MIT License
 
 Uses **phpmailer/phpmailer** and **vlucas/phpdotenv** under their own licenses
+
 Uses https://feathericons.com/
+
+Uses **HaeckDesign/Get-Social-Social-Media-Font** underCC 0 
