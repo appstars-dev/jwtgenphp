@@ -18,6 +18,7 @@ $ffoot= '
 </body>
 </html>';
 require 'bootstrap.php';
+require_once 'capi.php';
 $joinroom=EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
 if (EnvIsSet('', 'CheckWildcard', false))
 {$room= '*';}
@@ -77,6 +78,13 @@ if (isset($jituri)) {
         </div>
     </form>
     <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local("Go to meeting") . '</a></div>';
+        echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
+        <label class="form-label"><b>'.ini_local("Your short link").': </b></label><div class="input-group mb-3">
+        <input type="text" class="form-control" id="sjwtlink" name="sjwtlink" value="' . shortapi($link.$jwt, EnvIsSet('SLINK_URL','',''), EnvIsSet('SLINK_PASSWD','','')) . '">
+        <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWTLink()"></button>
+        </div>
+    </form>
+    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local("Go to meeting") . '</a></div>';
     }
 }
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
@@ -85,7 +93,8 @@ if (isset($jituri)) {
         <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="'.$jwt.'">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWToken()"></button>
         </div>
-    </form></div>';}
+    </form></div>';
+    }
 echo $ffoot;
 }
 
