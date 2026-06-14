@@ -72,7 +72,7 @@ if (isset($mail_wizard)){echo('');} else {
     try {
         $apiEndpoint = EnvIsSet("LINKGEN_URI","","")."api.php/shorten";
         $myLongUrl   = $link.$jwt;
-        $myApiKey    = EnvIsSet("LINKGEN_URI","","");
+        $myApiKey    = EnvIsSet("LINKGEN_API_KEY","","");
         $shortened = shortenLink($apiEndpoint, $myLongUrl, $myApiKey);
 
         $sresult = "{$shortened['short_url']}";
