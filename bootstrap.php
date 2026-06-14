@@ -70,7 +70,7 @@ function Recaptchadiv($key){
         echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
     }
 }
-function ini_local(string $filePath, string $englishValue, string $lang): string
+function ini_local(string $filePath, string $lang, string $englishValue): string
 {
     if (!file_exists($filePath)) {
         throw new RuntimeException("Can't find localization file: $filePath");
