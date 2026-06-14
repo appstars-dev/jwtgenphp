@@ -7,6 +7,10 @@ if (file_exists('vendor/autoload.php')) {
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
+/**
+ * @param string $text
+ * @return array|string|string[]
+ */
 function base64UrlEncode(string $text)
 {
     return str_replace(
@@ -16,6 +20,11 @@ function base64UrlEncode(string $text)
     );
 }
 
+/**
+ * @param string $proto
+ * @param string $uri
+ * @return string
+ */
 function CreateBaseURI (string $proto, string $uri): string
 {
 if ($proto != "http" or $proto != "https") {
@@ -29,6 +38,12 @@ if (!isset($uri)) $proto="";
     return $proto.$uri;
 }
 
+/**
+ * @param string $env
+ * @param string $post
+ * @param string $default
+ * @return mixed|string|void
+ */
 function EnvIsSet (string $env, string $post, string $default) {
 $value = $default;
 if (empty($_ENV[$env]) or (strcmp($_ENV[$env], "") == 0))
@@ -40,10 +55,19 @@ if (empty($_ENV[$env]) or (strcmp($_ENV[$env], "") == 0))
     }
 }
 
+/**
+ * @param string $env
+ * @param string $css_class
+ * @return void
+ */
 function HideDiv(string $env, string $css_class){
     if($_ENV[$env] !== null and strcmp($_ENV[$env], "") == 1){echo $css_class."{display:none;}";}
 }
 
+/**
+ * @param string $key
+ * @return void
+ */
 function addRecaptchaJS(string $key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key){
     echo '<script src="https://www.google.com/recaptcha/api.js?render='.$key.'" async defer></script>';
@@ -59,17 +83,33 @@ function addRecaptchaJS(string $key){
   </script>';}
     }
 }
+
+/**
+ * @param $key
+ * @return void
+ */
 function RecaptchaElement($key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key){
     echo 'data-sitekey="'.$key.'" data-callback="onSubmit"';
     }
 }
 
+/**
+ * @param $key
+ * @return void
+ */
 function Recaptchadiv($key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key and EnvIsSet('GR_VERSION','',3)==2){
         echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
     }
 }
+
+/**
+ * @param string $filePath
+ * @param string $lang
+ * @param string $englishValue
+ * @return string
+ */
 function ini_local(string $filePath, string $lang, string $englishValue): string
 {
     if (!file_exists($filePath)) {
