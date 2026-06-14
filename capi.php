@@ -20,33 +20,56 @@ function teleapi($token, $chat_id, $text)
     return file_get_contents($url, false, $context);
 }
 
-function shortapi($link, $api_url, $apiKey){
-    $ch = curl_init();
+function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array
+{
+    if (!filter_var($longUrl, FILTER_VALIDATE_URL)) {
+        throw new Exception('Incorrect format. Link have to begin with http:// or https://');
+    }
+
+    $ch = curl_init($apiUrl);
+
+    $payload = json_encode(['url' => $longUrl]);
+
     curl_setopt_array($ch, [
-        CURLOPT_URL            => $api_url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => $payload,
         CURLOPT_HTTPHEADER     => [
             'Content-Type: application/json',
-            'X-API-Key: ' . $apiKey,
+            'X-API-KEY: ' . $apiKey
         ],
-        CURLOPT_POSTFIELDS     => json_encode(['url' => $link]),
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_SSL_VERIFYPEER => true
     ]);
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $error    = curl_error($ch);
 
-    if ($error) {
-        die('cURL error: ' . $error);
+    if ($error !== '') {
+        throw new Exception('cURL Error: ' . $error);
     }
 
-    $data = json_decode($response, true);
+    $result = json_decode($response, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('Can not recognise server response. RAW data: ' . $response);
+    }
+
+    // Проверка на ошибки по HTTP коду или полю error в ответе
     if ($httpCode !== 200) {
-        die('Error ' . $httpCode . ': ' . ($data['error'] ?? $response));
+        $message = $result['error'] ?? 'Unknown server error';
+        throw new Exception("API Error (HTTP {$httpCode}): {$message}");
     }
 
-    echo $data['short_url'];
+    // Если всё ок, возвращаем данные
+    if (!isset($result['short_url']) || !isset($result['short_code'])) {
+        throw new Exception('Unexpected response format');
+    }
+
+    return [
+        'long_url'  => $result['long_url'] ?? $longUrl,
+        'short_url' => $result['short_url'],
+        'short_code'=> $result['short_code']
+    ];
 }

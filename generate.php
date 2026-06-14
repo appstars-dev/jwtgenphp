@@ -6,7 +6,7 @@ $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 $l10n_file="locale.ini";
 $fhead='<!DOCTYPE html >
 <html lang="'.$L10N_CODE.'">
-    <title>JWT tag generator</title>
+    <title>'.ini_local($l10n_file, $L10N_CODE, "JWT token generator").'</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
         <link rel="icon" href="images/no_avatar.png" type="image/png">
@@ -65,11 +65,22 @@ $base64UrlSignature = base64UrlEncode($signature);
 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
 //Create Link
-$jituri = EnvIsSet('JITSI_URI','InputURI','');
-$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jituri)."/".$joinroom."?jwt=";
+$jitsi_uri = EnvIsSet('JITSI_URI','InputURI','');
+$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jitsi_uri)."/".$joinroom."?jwt=";
 if (isset($mail_wizard)){echo('');} else {
 
-if (isset($jituri)) {
+    try {
+        $apiEndpoint = EnvIsSet("LINKGEN_URI","","")."api.php/shorten";
+        $myLongUrl   = $link.$jwt;
+        $myApiKey    = EnvIsSet("LINKGEN_URI","","");
+        $shortened = shortenLink($apiEndpoint, $myLongUrl, $myApiKey);
+
+        $sresult = "{$shortened['short_url']}";
+
+    } catch (Exception $e) {
+        $sresult = "Error: " . $e->getMessage();
+    }
+
     echo $fhead;
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "token") !== 0) {
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
@@ -82,13 +93,13 @@ if (isset($jituri)) {
 
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your short link").': </b></label><div class="input-group mb-3">
-        <input type="text" class="form-control" id="sjwtlink" name="sjwtlink" value="' . shortapi($link.$jwt, EnvIsSet('LINKGEN_URI','','https://loacalhost/api.php'), EnvIsSet('LINKGEN_API_KEY','','1')) . '">
+        <input type="text" class="form-control" id="sjwtlink" name="sjwtlink" value="' . $sresult. '">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyToClipboard(\'sjwtlink\')"></button>
         </div>
     </form>
     <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
     }
-}
+
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your token").':</b></label><div class="input-group mb-3">
