@@ -1,24 +1,14 @@
-function copyJWTLink() {
-    const inputElement = document.getElementById('jwtlink');
-    inputElement.select();
-    inputElement.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    //alert("Copied the text: " + inputElement.value);
-}
+function copyToClipboard(elementId) {
+    const copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
 
-function copyJWToken() {
-    const inputElement = document.getElementById('jwtoken');
-    inputElement.select();
-    inputElement.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    //alert("Copied the text: " + inputElement.value);
-}
-function copyRoom() {
-    const inputElement = document.getElementById('InputRoom');
-    inputElement.select();
-    inputElement.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    //alert("Copied the text: " + inputElement.value);
+    try {
+        navigator.clipboard.writeText(copyText.value).catch(console.error);
+        //alert("Copied: " + copyText.value);
+    } catch (err) {
+        console.error("Unable to copy text: ", err);
+    }
 }
 
 var surnameList = [
@@ -42,7 +32,6 @@ function randomName() {
 }
 
 function randomEmail() {
-    // Генерируем случайную строку из букв и цифр
     function generateRandomString(length) {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -53,7 +42,6 @@ function randomEmail() {
         return result;
     }
 
-    // Генерируем имя пользователя и домен
     const username = generateRandomString(10);
     const domain = 'jwtgenfake' + '.tech';
 

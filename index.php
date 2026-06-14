@@ -113,7 +113,7 @@ $version="beta2";
     <div class="mb-3">
     <label for="InputRoom" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Room name'); ?></label>
         <div class="input-group mb-3">
-    <input type="text" class="form-control form-control-lg" name="InputRoom" id="InputRoom" placeholder="<?php echo EnvIsSet('DEFAULT_ROOM','','public')?>" aria-describedby="RoomHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="generateUUID()"></button><button type="button" class="btn btn-outline-primary feather icon-copy" onclick="copyRoom()"></button>
+    <input type="text" class="form-control form-control-lg" name="InputRoom" id="InputRoom" placeholder="<?php echo EnvIsSet('DEFAULT_ROOM','','public')?>" aria-describedby="RoomHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="generateUUID()"></button><button type="button" class="btn btn-outline-primary feather icon-copy" onclick="copyToClipboard('InputRoom')"></button>
         </div>
     <div id="RoomHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Permitted room');?></div>
   </div>
