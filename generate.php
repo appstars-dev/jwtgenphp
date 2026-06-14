@@ -1,9 +1,10 @@
 <?php 
 // HTML Init
+require 'bootstrap.php';
+require_once 'capi.php';
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 $l10n_file="locale.ini";
 $fhead='<!DOCTYPE html >
-<html lang=en>
 <html lang="'.$L10N_CODE.'">
     <title>JWT tag generator</title>
     <meta charset="utf-8">
@@ -19,8 +20,6 @@ $fhead='<!DOCTYPE html >
 $ffoot= '
 </body>
 </html>';
-require 'bootstrap.php';
-require_once 'capi.php';
 $joinroom=EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
 if (EnvIsSet('', 'CheckWildcard', false))
 {$room= '*';}

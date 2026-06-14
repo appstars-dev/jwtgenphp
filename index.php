@@ -2,7 +2,7 @@
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 $l10n_file="locale.ini";
 require_once 'public.conf.php';
-$version="beta1";
+$version="beta2";
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $L10N_CODE; ?>">
@@ -18,9 +18,9 @@ $version="beta1";
         <link rel="stylesheet" href="css/sociallyiconic.css">
         <link rel="stylesheet" href="css/sociallyiconic-codes.css">
         <link rel="stylesheet" href="css/sociallyiconic-embedded.css">
-        <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="js/jquery-4.0.0.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-4.0.0.min.js"></script>
+        <script src="js/main.js"></script>
     <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
     <style>
         <?php 
@@ -63,7 +63,7 @@ $version="beta1";
               </ul>
           </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="about" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <?php echo ini_local($l10n_file, $L10N_CODE, "About"); ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -127,7 +127,7 @@ $version="beta1";
     <div id="AppidHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, "ID of your Jitsi application");?>.</div>
   </div>
   <div class="mb-3 div_secret">
-    <label for="InputJSecret" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'JitsiSecret');?></label>
+    <label for="InputJSecret" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Jitsi Secret');?></label>
     <input type="password" class="form-control form-control-lg" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHelp" <?php if (empty($_ENV['JWT_KEY'])){echo 'required';} ?> >
     <div id="JSecretHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Secret of your Jitsi application');?></div>
   </div>
