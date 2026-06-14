@@ -67,20 +67,63 @@ function RecaptchaElement($key){
 
 function Recaptchadiv($key){
     if (EnvIsSet('GR_ENABLED','',false) == "true" and $key and EnvIsSet('GR_VERSION','',3)==2){
-    echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
+        echo '<div class="g-recaptcha" data-sitekey="'.$key.'"></div>';
     }
 }
-function ini_local(string $string): string
+function ini_local(string $filePath, string $englishValue, string $lang): string
 {
-$ini_array = parse_ini_file("locale.ini", true);
-$key = array_search($string, $ini_array);
-# print_r($ini_array);
-$array = array(0 => 'blue', 1 => 'red', 2 => 'green', 3 => 'red');
-$key_t = array_search('green', $array); // $key = 2;
-$key_t = array_search('red', $array); // $key = 1;
-return $string;
+    if (!file_exists($filePath)) {
+        throw new RuntimeException("Can't find localization file: $filePath");
+    }
 
-}
-function ini_l10n(string $string){
-    $ini = new IniModifier('locale.ini');
+    $content = file_get_contents($filePath);
+    if ($content === false) {
+        throw new RuntimeException("Can't read localization file: $filePath");
+    }
+
+    $lines = preg_split('/\r\n|\r|\n/', $content);
+
+    $currentLang = null;
+    $translations = [];
+
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, ';')) {
+            continue;
+        }
+
+        if (preg_match('/^\[([a-zA-Z]{2,})\]$/', $line, $matches)) {
+            $currentLang = strtolower($matches[1]);
+            continue;
+        }
+
+        if ($currentLang === null) {
+            continue;
+        }
+
+        if (preg_match('/^([A-Z_]+)\s*=\s*(?|"([^"]*)"|\'([^\']*)\'|([^\s#]+))$/', $line, $matches)) {
+            $keyName = $matches[1];
+            $value   = isset($matches[2]) ? $matches[2] : (isset($matches[3]) ? $matches[3] : $matches[4]);
+
+            $translations[$currentLang][$keyName] = $value;
+        }
+    }
+    $key = null;
+    if (isset($translations['en'])) {
+        foreach ($translations['en'] as $k => $v) {
+            if ($v === $englishValue) {
+                $key = $k;
+                break;
+            }
+        }
+    }
+
+    if ($key === null) {
+        return $englishValue;
+    }
+
+    if (isset($translations[$lang][$key])) {
+        return $translations[$lang][$key];
+    }
+    return $englishValue;
 }

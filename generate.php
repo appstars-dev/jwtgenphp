@@ -1,8 +1,10 @@
 <?php 
 // HTML Init
+$L10N_CODE=EnvIsSet('L10N_CODE','','en');
+$l10n_file="locale.ini";
 $fhead='<!DOCTYPE html >
 <html lang=en>
-<head>
+<html lang="'.$L10N_CODE.'">
     <title>JWT tag generator</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
@@ -72,24 +74,24 @@ if (isset($jituri)) {
     echo $fhead;
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "token") !== 0) {
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local("Your link").': </b></label><div class="input-group mb-3">
+        <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your link").': </b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtlink" name="jwtlink" value="' . $link . $jwt . '">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWTLink()"></button>
         </div>
     </form>
-    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local("Go to meeting") . '</a></div>';
+    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local("Your short link").': </b></label><div class="input-group mb-3">
+        <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your short link").': </b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="sjwtlink" name="sjwtlink" value="' . shortapi($link.$jwt, EnvIsSet('SLINK_URL','',''), EnvIsSet('SLINK_PASSWD','','')) . '">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWTLink()"></button>
         </div>
     </form>
-    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local("Go to meeting") . '</a></div>';
+    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
     }
 }
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
     echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local("Your token").':</b></label><div class="input-group mb-3">
+        <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your token").':</b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="'.$jwt.'">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyJWToken()"></button>
         </div>
