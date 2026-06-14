@@ -1,7 +1,6 @@
 <?php
 function teleapi($token, $chat_id, $text)
 {
-    //$token  замените на токен вашего бота $chat_id ID пользователя или username канала
     $url = "https://api.telegram.org/bot{$token}/sendMessage";
     $data = [
         'chat_id' => $chat_id,
@@ -39,7 +38,6 @@ function shortapi($link, $api_url, $apiKey){
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $error    = curl_error($ch);
-    curl_close($ch);
 
     if ($error) {
         die('cURL error: ' . $error);
