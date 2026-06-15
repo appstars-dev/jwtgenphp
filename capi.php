@@ -56,13 +56,11 @@ function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array
         throw new Exception('Can not recognise server response. RAW data: ' . $response);
     }
 
-    // Проверка на ошибки по HTTP коду или полю error в ответе
     if ($httpCode !== 200) {
         $message = $result['error'] ?? 'Unknown server error';
         throw new Exception("API Error (HTTP {$httpCode}): {$message}");
     }
 
-    // Если всё ок, возвращаем данные
     if (!isset($result['short_url']) || !isset($result['short_code'])) {
         throw new Exception('Unexpected response format');
     }
