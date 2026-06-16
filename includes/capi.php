@@ -1,24 +1,37 @@
 <?php
 function teleapi($token, $chat_id, $text)
 {
-    $url = "https://api.telegram.org/bot{$token}/sendMessage";
+    $url = "https://api.telegram.org/bot".$token."/sendMessage";
     $data = [
         'chat_id' => $chat_id,
         'text' => $text,
         'parse_mode' => 'HTML'
     ];
 
-    $options = [
-        'http' => [
-            'header' => "Content-type: application/x-www-form-urlencoded",
-            'method' => 'POST',
-            'content' => http_build_query($data)
-        ]
-    ];
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
-    $context = stream_context_create($options);
-    return file_get_contents($url, false, $context);
+    $response = curl_exec($ch);
+    $err = curl_error($ch);
+
+    if ($err) {
+        throw new Exception('cURL error: ' . $err);
+    }
+
+    return $response;
 }
+
+function sendMessageByUsername($pdo, $token, $username, $text) {
+    $stmt = $pdo->prepare("SELECT chat_id FROM users WHERE username = :username");
+    $stmt->execute([':username' => $username]);
+    $row = $stmt->fetch();
+
+    if (!$row) {
+        throw new Exception("Пользователь @{$username} не найден (не писал боту).");
+    }
 
 function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array
 {
@@ -70,4 +83,5 @@ function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array
         'short_url' => $result['short_url'],
         'short_code'=> $result['short_code']
     ];
+}
 }

@@ -3,7 +3,7 @@
 if (file_exists('vendor/autoload.php')) {
     require_once('vendor/autoload.php');
 }
-
+require_once ('capi.php');
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
@@ -166,4 +166,49 @@ function ini_local(string $filePath, string $lang, string $englishValue): string
         return $translations[$lang][$key];
     }
     return $englishValue;
+}
+
+
+
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+function qrcode($text){
+    try {
+        // 2. Создаем QR код (только данные)
+        $qrCode = new QrCode($text);
+
+        // 3. Создаем Encoding (КОНСТРУКТОР ПУСТОЙ!)
+        // Именно здесь была твоя ошибка, если ты передавал аргументы.
+        $encoding = new Encoding();
+
+        // 4. Настраиваем через сеттеры
+        $encoding
+            ->setForegroundColor(new Color(0, 0, 0))           // Черный
+            ->setBackgroundColor(new Color(255, 255, 255))     // Белый
+            ->setErrorCorrectionLevel(ErrorCorrectionLevel::High); // Коррекция ошибок
+
+        // 5. Генерируем картинку
+        $writer = new PngWriter();
+        $result = $writer->write(
+            $qrCode,
+            300, // Размер в пикселях
+            10,       // Отступ в модулях
+            $encoding // Передаем объект настроек
+        );
+
+        // 6. Выводим в браузер
+        header('Content-Type: ' . $result->getMimeType());
+        echo $result->getString();
+
+    } catch (\Throwable $e) {
+        // Если ошибка всё же вылезет, мы увидим её текст в браузере
+        http_response_code(500);
+        echo 'Ошибка генерации QR: ' . $e->getMessage() . '<br>';
+        echo 'Файл: ' . $e->getFile() . ':' . $e->getLine();
+    }
 }

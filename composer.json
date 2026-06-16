@@ -16,7 +16,8 @@
         "endroid/qr-code": "6.1.3",
         "khanamiryan/qrcode-detector-decoder": "2.0.3",
         "ext-json": "*",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {

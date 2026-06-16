@@ -1,6 +1,7 @@
 /vendor
 composer.lock
 .env
+includes/*.db
 *.tar.gz
 
 ### Linux ###

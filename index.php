@@ -1,4 +1,4 @@
-<?php require_once 'bootstrap.php';
+<?php require_once 'includes/bootstrap.php';
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 $l10n_file="locale.ini";
 require_once 'public.conf.php';
