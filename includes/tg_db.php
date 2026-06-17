@@ -1,22 +1,28 @@
 <?php
-$dbFile = __DIR__ . '/tg_users.db';
+$rootDir = dirname(__DIR__);
 
+if (file_exists($rootDir . '/includes/bootstrap.php')) {
+    require_once $rootDir . '/includes/bootstrap.php';
+} elseif (file_exists($rootDir . '/bootstrap.php')) {
+    require_once $rootDir . '/bootstrap.php';
+}
 
-$pdo = new PDO("sqlite:{$dbFile}", null, null, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-]);
+$debug = EnvIsSet("DEBUG_MODE", "", false);
 
-echo("DB was connected, check users table...");
+$dbFile = $rootDir . '/includes/tg_users.db';
 
-// Checking if the table exists
-$result = $pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name='users';");
-$tableExists = $result && $result->fetchColumn();
+try {
+    // Вот эта строка создает соединение и файл БД, если его нет:
+    $pdo = new PDO("sqlite:{$dbFile}", null, null, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]);
 
-if (!$tableExists) {
-    echo("Users table was not found! Creating table...");
-    $createSql = "
-        CREATE TABLE users (
+    if ($debug) echo "DB connected: {$dbFile}\n";
+
+    // Создаем таблицу, если её нет
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS users (
             chat_id INTEGER PRIMARY KEY,
             username TEXT,
             first_name TEXT,
@@ -24,23 +30,16 @@ if (!$tableExists) {
             joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
-    ";
-    try {
-        $pdo->exec($createSql);
-        echo("Users table was created.!");
-    } catch (PDOException $e) {
-        echo("Fatal error while creating the table: " . $e->getMessage());
-        exit(1);
-    }
-} else {
-    echo("Users table already exists!.");
+    ");
+
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS bot_state (
+            key_name TEXT PRIMARY KEY,
+            value    TEXT
+        )
+    ");
+
+} catch (PDOException $e) {
+    error_log("DB Error: " . $e->getMessage());
+    throw $e;
 }
-
-$pdo->exec("
-    CREATE TABLE IF NOT EXISTS bot_state (
-        key_name TEXT PRIMARY KEY,
-        value    TEXT
-    )
-");
-
-return $pdo;
