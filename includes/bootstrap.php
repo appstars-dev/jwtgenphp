@@ -53,7 +53,9 @@ if (empty($_ENV[$env]) or (strcmp($_ENV[$env], "") == 0))
         return $value;
     }
 }
-
+function logDebug($msg) {
+    echo "[DEBUG] " . date('H:i:s') . " - {$msg}\n";
+}
 /**
  * @param string $env
  * @param string $css_class
