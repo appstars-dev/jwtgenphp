@@ -1,7 +1,6 @@
 <?php 
 // HTML Init
-require 'bootstrap.php';
-require_once 'capi.php';
+require 'includes/bootstrap.php';
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 $l10n_file="locale.ini";
 $fhead='<!DOCTYPE html >
@@ -70,9 +69,9 @@ $link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jitsi_uri)."/".$joinroo
 if (isset($mail_wizard)){echo('');} else {
 
     try {
-        $apiEndpoint = EnvIsSet("LINKGEN_URI","","")."api.php/shorten";
+        $apiEndpoint = EnvIsSet("SLINK_URL","","")."api.php/shorten";
         $myLongUrl   = $link.$jwt;
-        $myApiKey    = EnvIsSet("LINKGEN_API_KEY","","");
+        $myApiKey    = EnvIsSet("SLINK_API_KEY","","");
         $shortened = shortenLink($apiEndpoint, $myLongUrl, $myApiKey);
 
         $sresult = "{$shortened['short_url']}";
@@ -90,6 +89,7 @@ if (isset($mail_wizard)){echo('');} else {
         </div>
     </form>
     <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
+     echo qrcode($link . $jwt);
 
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your short link").': </b></label><div class="input-group mb-3">
@@ -97,7 +97,7 @@ if (isset($mail_wizard)){echo('');} else {
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyToClipboard(\'sjwtlink\')"></button>
         </div>
     </form>
-    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
+    <a class="btn btn-outline-secondary" href="' . $sresult . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
     }
 
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {

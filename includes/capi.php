@@ -30,7 +30,7 @@ function sendMessageByUsername($pdo, $token, $username, $text) {
     $row = $stmt->fetch();
 
     if (!$row) {
-        throw new Exception("Пользователь @{$username} не найден (не писал боту).");
+        throw new Exception("User @{$username} was not found. He possibly didn't write ".EnvIsSet("","","bot").".");
     }
 
 function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array

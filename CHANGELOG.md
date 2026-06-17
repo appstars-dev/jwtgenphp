@@ -31,3 +31,6 @@
 ## beta2
  - (~) Code review 
  - (+) Added useful links to the menu
+ - (+) Finished localisation function
+ - (!) **appstars/slinkgen** API support
+ - (+) Telegram sender
