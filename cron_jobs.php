@@ -2,7 +2,6 @@
 $logPath = '/tmp/cron_test.log';
 //file_put_contents($logPath, date('Y-m-d H:i:s') . " - TGCron Script is running\n", FILE_APPEND);
 require ('includes/bootstrap.php');
-echo EnvIsSet("TG_BOT_TOKEN","","empty");
 echo "Token length: " . strlen(EnvIsSet("TG_BOT_TOKEN","","")) . " символов\n";
 
 $scriptDir = __DIR__;
