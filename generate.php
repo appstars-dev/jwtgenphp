@@ -89,7 +89,6 @@ if (isset($mail_wizard)){echo('');} else {
         </div>
     </form>
     <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
-     echo qrcode($link . $jwt);
 
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
         <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your short link").': </b></label><div class="input-group mb-3">
