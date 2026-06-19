@@ -24,14 +24,16 @@ function teleapi($token, $chat_id, $text)
     return $response;
 }
 
-function sendMessageByUsername($pdo, $token, $username, $text) {
+function sendMessageByUsername($pdo, $token, $username, $text)
+{
     $stmt = $pdo->prepare("SELECT chat_id FROM users WHERE username = :username");
     $stmt->execute([':username' => $username]);
     $row = $stmt->fetch();
 
     if (!$row) {
-        throw new Exception("User @{$username} was not found. He possibly didn't write ".EnvIsSet("","","bot").".");
+        throw new Exception("User @{$username} was not found. He possibly didn't write " . EnvIsSet("", "", "bot") . ".");
     }
+}
 
 function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array
 {
@@ -84,4 +86,4 @@ function shortenLink(string $apiUrl, string $longUrl, string $apiKey): array
         'short_code'=> $result['short_code']
     ];
 }
-}
+

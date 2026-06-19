@@ -77,6 +77,11 @@ $version="beta2";
           <a class="nav-link disabled" tabindex="-1" aria-disabled="true"><?php echo ini_local($l10n_file, $L10N_CODE, "Your custom wishes")?></a>
         </li>
       </ul>
+        <form class="d-flex">
+            <ul class="si si-circle si-cubizer si-bg-white">
+                <li><a href="#" class="github"><span><i class="iconic-github"></i></span><span class="si-label">GitHub</span></a></li>
+            </ul>
+        </form>
     </div>
   </div>
 </nav>
