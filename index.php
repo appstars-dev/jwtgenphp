@@ -92,7 +92,7 @@ $version="beta2";
     <div class="mb-3">
     <label for="InputName" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Person name');?></label>
         <div class="input-group mb-3">
-    <input type="text" class="form-control form-control-lg" name="InputName" id="InputName" placeholder="<?php echo ini_local($l10n_file, $L10N_CODE, 'Anonymous'); ?>" aria-describedby="NameHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="randomName()"></button>
+    <input type="text" class="form-control form-control-lg" name="InputName" id="InputName" placeholder="<?php echo ini_local($l10n_file, $L10N_CODE, 'Anonymous'); ?>" aria-describedby="NameHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="fillRandomName('<?= $L10N_CODE ?>')"></button>
         </div>
     <div id="NameHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Participant\'s name'); ?></div>
   </div>
