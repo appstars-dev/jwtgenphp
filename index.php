@@ -159,7 +159,7 @@ $version="beta2";
 
   <?php Recaptchadiv(EnvIsSet('GR_SITE_KEY','','')); ?><br>
   <button type="submit" formaction="generate.php" name="submit_generate" value="submit_1" class="btn btn-primary" <?php RecaptchaElement(EnvIsSet('GR_SITE_KEY','',''));?> ><?php echo ini_local($l10n_file, $L10N_CODE, "Generate"); ?></button>
-  <?php if (!EnvIsSet('DISABLE_SMTP','','false')){ echo '<button type="submit" formaction="incudes/postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary"'. RecaptchaElement(EnvIsSet('GR_SITE_KEY','','')).'>'.ini_local($l10n_file, $L10N_CODE, "Mail to"). '</button>'; } ?>
+  <?php if (strcmp(EnvIsSet('DISABLE_SMTP', '', 'false'), "true") !== 0){ echo '<button type="submit" formaction="postwizard.php" name="submit_post" value="submit_2" class="btn btn-primary"'. RecaptchaElement(EnvIsSet('GR_SITE_KEY','','')).'>'.ini_local($l10n_file, $L10N_CODE, "Mail to"). '</button>'; } ?>
 </form>
 </div>
     <div id="footer">JWTGenPHP <?php echo $version.' &copy;'.date("Y"); ?> AppStars.<br> MIT and other licenses</div>

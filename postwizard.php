@@ -4,12 +4,12 @@ $mail_tpl='';
 $mail_text='';
 $mail_link = '';
 
-if (file_exists('../vendor/autoload.php')) {
-    require_once('../vendor/autoload.php');
+if (file_exists('.vendor/autoload.php')) {
+    require_once('vendor/autoload.php');
 }
 
-if (file_exists('../generate.php')) {
-    require_once('../generate.php');
+if (file_exists('generate.php')) {
+    require_once('generate.php');
 }
 
 use PHPMailer\PHPMailer\PHPMailer;

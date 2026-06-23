@@ -3,6 +3,8 @@
 require 'includes/bootstrap.php';
 $L10N_CODE = EnvIsSet('L10N_CODE', '', 'en');
 $l10n_file = "locale.ini";
+$L10N_MAIL=EnvIsSet('L10N_MAIL','','en');
+$l10n_m_file = "mail_l10n.ini";
 $fhead = '<!DOCTYPE html >
 <html lang="' . $L10N_CODE . '">
     <title>' . ini_local($l10n_file, $L10N_CODE, "JWT token generator") . '</title>
@@ -126,7 +128,7 @@ if (isset($mail_wizard)) {
 }
 
 //For mailing
-$mail_text = '<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>';
+$mail_text = '<p>'. ini_local($l10n_m_file,$L10N_MAIL,"Dear").' '.EnvIsSet("","InputName","Anonymous").',</p> '.ini_local($l10n_m_file,$L10N_MAIL,"<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>");
 $mail_link = '<h2>Your Link:</h2> <a href="' . $link . $jwt . '">' . $link . $jwt . '</a></div>';
 $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
@@ -134,7 +136,7 @@ $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>'.ini_local($l10n_m_file,$L10N_MAIL,"You were suggested to Jitsi Meeting").'</title>
   </head>
   <body style="margin: 0; padding: 0">
     <table style="background-color: #f4f4f8; height: 100%" width="100%" cellspacing="0" cellpadding="0">
@@ -182,7 +184,7 @@ $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                               <tbody><tr>
                                 <td valign="middle" align="center">
                                   <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="' . $link . $jwt . '" target="_blank" rel="noopener">
-                                    <b>Join</b>
+                                    '.ini_local($l10n_m_file,$L10N_MAIL,"<b>Join</b>").'
                                   </a>
                                 </td>
                               </tr>
