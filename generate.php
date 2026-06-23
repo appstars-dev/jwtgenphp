@@ -1,11 +1,11 @@
-<?php 
+<?php
 // HTML Init
 require 'includes/bootstrap.php';
-$L10N_CODE=EnvIsSet('L10N_CODE','','en');
-$l10n_file="locale.ini";
-$fhead='<!DOCTYPE html >
-<html lang="'.$L10N_CODE.'">
-    <title>'.ini_local($l10n_file, $L10N_CODE, "JWT token generator").'</title>
+$L10N_CODE = EnvIsSet('L10N_CODE', '', 'en');
+$l10n_file = "locale.ini";
+$fhead = '<!DOCTYPE html >
+<html lang="' . $L10N_CODE . '">
+    <title>' . ini_local($l10n_file, $L10N_CODE, "JWT token generator") . '</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
         <link rel="icon" href="images/no_avatar.png" type="image/png">
@@ -16,16 +16,17 @@ $fhead='<!DOCTYPE html >
         <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>';
-$ffoot= '
+$ffoot = '
 </body>
 </html>';
-$joinroom=EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
-if (EnvIsSet('', 'CheckWildcard', false))
-{$room= '*';}
-else
-{$room=$joinroom;}
+$joinroom = EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
+if (EnvIsSet('', 'CheckWildcard', false)) {
+    $room = '*';
+} else {
+    $room = $joinroom;
+}
 // get the local secret key
-$secret = EnvIsSet('JWT_KEY','InputJSecret', 'no secret');
+$secret = EnvIsSet('JWT_KEY', 'InputJSecret', 'no secret');
 
 // Create the token header
 $header = json_encode([
@@ -35,16 +36,16 @@ $header = json_encode([
 
 // Create the token payload
 $payload = json_encode([
-    'aud' => EnvIsSet('APP_ID','InputAppid', ''),
-    'iss' => EnvIsSet('APP_ID','InputAppid', ''),
-    'sub' => EnvIsSet('JITSI_URI','InputURI', ''),
-    'exp' => time() + EnvIsSet('EXPIRES','ExpirationTime', '30')*60,
-    'context' =>array(
-    'user_id' => array(
-        "name" => EnvIsSet('','InputName', 'Anonymous'),
-        "email" => EnvIsSet('','InputEmail', 'anonymous@email.com'),
-        "id" => EnvIsSet('','InputEmail', 'anonymous@email.com'))),
-    'moderator' => EnvIsSet('','CheckModerator', false) === "on",
+    'aud' => EnvIsSet('APP_ID', 'InputAppid', ''),
+    'iss' => EnvIsSet('APP_ID', 'InputAppid', ''),
+    'sub' => EnvIsSet('JITSI_URI', 'InputURI', ''),
+    'exp' => time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60,
+    'context' => array(
+        'user_id' => array(
+            "name" => EnvIsSet('', 'InputName', 'Anonymous'),
+            "email" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'),
+            "id" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'))),
+    'moderator' => EnvIsSet('', 'CheckModerator', false) === "on",
     'room' => $room,
 ]);
 
@@ -64,14 +65,16 @@ $base64UrlSignature = base64UrlEncode($signature);
 $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
 //Create Link
-$jitsi_uri = EnvIsSet('JITSI_URI','InputURI','');
-$link = CreateBaseURI(EnvIsSet('URI_PROTO','','https'), $jitsi_uri)."/".$joinroom."?jwt=";
-if (isset($mail_wizard)){echo('');} else {
+$jitsi_uri = EnvIsSet('JITSI_URI', 'InputURI', '');
+$link = CreateBaseURI(EnvIsSet('URI_PROTO', '', 'https'), $jitsi_uri) . "/" . $joinroom . "?jwt=";
+if (isset($mail_wizard)) {
+    echo('');
+} else {
 
     try {
-        $apiEndpoint = EnvIsSet("SLINK_URL","","")."api.php/shorten";
-        $myLongUrl   = $link.$jwt;
-        $myApiKey    = EnvIsSet("SLINK_API_KEY","","");
+        $apiEndpoint = EnvIsSet("SLINK_URL", "", "") . "api.php/shorten";
+        $myLongUrl = $link . $jwt;
+        $myApiKey = EnvIsSet("SLINK_API_KEY", "", "");
         $shortened = shortenLink($apiEndpoint, $myLongUrl, $myApiKey);
 
         $sresult = "{$shortened['short_url']}";
@@ -83,46 +86,49 @@ if (isset($mail_wizard)){echo('');} else {
     echo $fhead;
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "token") !== 0) {
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your link").': </b></label><div class="input-group mb-3">
+        <label class="form-label"><b>' . ini_local($l10n_file, $L10N_CODE, "Your link") . ': </b></label><div class="input-group mb-3">
         <input type="text" class="form-control" id="jwtlink" name="jwtlink" value="' . $link . $jwt . '">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyToClipboard(\'jwtlink\')"></button>
         </div>
     </form>
-    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
+    <a class="btn btn-outline-secondary" href="' . $link . $jwt . '"><span class="feather icon-log-in"></span> ' . ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
 
         echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your short link").': </b></label><div class="input-group mb-3">
-        <input type="text" class="form-control" id="sjwtlink" name="sjwtlink" value="' . $sresult. '">
+        <label class="form-label"><b>' . ini_local($l10n_file, $L10N_CODE, "Your short link") . ': </b></label><div class="input-group mb-3">
+        <input type="text" class="form-control" id="sjwtlink" name="sjwtlink" value="' . $sresult . '">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyToClipboard(\'sjwtlink\')"></button>
         </div>
     </form>
-    <a class="btn btn-outline-secondary" href="' . $sresult . '"><span class="feather icon-log-in"></span> '. ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
+    <a class="btn btn-outline-secondary" href="' . $sresult . '"><span class="feather icon-log-in"></span> ' . ini_local($l10n_file, $L10N_CODE, "Go to meeting") . '</a></div>';
     }
 
     if (strcmp(EnvIsSet('RESULT', '', 'both'), "link") !== 0) {
-    echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
-        <label class="form-label"><b>'.ini_local($l10n_file, $L10N_CODE, "Your token").':</b></label><div class="input-group mb-3">
-        <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="'.$jwt.'">
+        echo '<div class="shadow p-3 mb-5 bg-body rounded"> <form>
+        <label class="form-label"><b>' . ini_local($l10n_file, $L10N_CODE, "Your token") . ':</b></label>
+        <div class="input-group mb-3">
+        <input type="text" class="form-control" id="jwtoken" name="jwtoken" value="' . $jwt . '">
         <button type="button" class="btn btn-outline-secondary feather icon-copy" onclick="copyToClipboard(\'jwtoken\')"></button>
         </div>
     </form></div>';
     }
-    echo '
-<div style="width: 33%" class="p-3 mb-5 bg-body rounded"> <form>
+    if (strcmp(EnvIsSet('TG_ENABLED', '', 'false'), "true") === 0) { echo '
+<div style="width: 33%" class="p-3 mb-5 bg-body rounded"> 
+<form>
+<label class="form-label"><b>' . ini_local($l10n_file, $L10N_CODE, "Send to a participant of")." <a href='https://t.me/". EnvIsSet("TG_BOT_NAME","","your telegram bot")."'>@".EnvIsSet("TG_BOT_NAME","","your telegram bot")."</a>" . ':</b></label>
 <div class="input-group mb-3">
     <input type="text" class="form-control" id="tguser" name="tguser" placeholder="username">
-        <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\')"></button>
+    <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\')"></button>
         </div>
     </form>
-    </div>
-    ';
-echo $ffoot;
+    </div>';
+    }
+    echo $ffoot;
 }
 
 //For mailing
-$mail_text='<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>';
-$mail_link= '<h2>Your Link:</h2> <a href="' . $link . $jwt .'">'.$link . $jwt.'</a></div>';
-$mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+$mail_text = '<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>';
+$mail_link = '<h2>Your Link:</h2> <a href="' . $link . $jwt . '">' . $link . $jwt . '</a></div>';
+$mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 <html lang=en>
   <head>
@@ -147,10 +153,10 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                               <tbody>
                                 <tr>
                                   <td style="padding: 0; width: 300px; text-align: left;" align="left">
-                                    <img style="display: block" src="'.EnvIsSet('MAIL_LOGO','','https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true').'" alt="logo" width="64">
+                                    <img style="display: block" src="' . EnvIsSet('MAIL_LOGO', '', 'https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true') . '" alt="logo" width="64">
                                   </td>
                                   <td style="padding: 0; width: 300px" align="right">
-                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="'.EnvIsSet('SMTP_USR','CheckSMTPLogin', "default_user").'" target="_blank" rel="noopener">Mail back to author</a>
+                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="' . EnvIsSet('SMTP_USR', 'CheckSMTPLogin', "default_user") . '" target="_blank" rel="noopener">Mail back to author</a>
                                    </td>
                                 </tr>
                               </tbody>
@@ -167,7 +173,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                       <tbody>
                         <tr>
                           <td style="padding-top: 0; padding-bottom: 40px; font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; width: 600px; height: 27px;">
-                            '.$mail_text.'
+                            ' . $mail_text . '
                           </td>
                         </tr>
                         <tr>
@@ -175,7 +181,7 @@ $mail_tpl='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                             <table cellpadding="0" cellspacing="0" style="background-color: rgb(4, 119, 4); border-radius: 12px; padding: 14px 28px;">
                               <tbody><tr>
                                 <td valign="middle" align="center">
-                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="'. $link . $jwt .'" target="_blank" rel="noopener">
+                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="' . $link . $jwt . '" target="_blank" rel="noopener">
                                     <b>Join</b>
                                   </a>
                                 </td>
