@@ -107,6 +107,15 @@ if (isset($mail_wizard)){echo('');} else {
         </div>
     </form></div>';
     }
+    echo '
+<div style="width: 33%" class="p-3 mb-5 bg-body rounded"> <form>
+<div class="input-group mb-3">
+    <input type="text" class="form-control" id="tguser" name="tguser" placeholder="username">
+        <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\')"></button>
+        </div>
+    </form>
+    </div>
+    ';
 echo $ffoot;
 }
 

@@ -10,6 +10,28 @@ function copyToClipboard(elementId) {
         console.error("Unable to copy text: ", err);
     }
 }
+function send_tg(btnid, inputid) {
+    document.getElementById(btnid).addEventListener('click', () => {
+        const username = document.getElementById(inputid).value.trim();
+        const message = document.getElementById('jwtlink').value.trim();
+
+        if (!username) return alert('Insert username');
+        if (!message) return alert('Insert message');
+
+        fetch('tg_send.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: new URLSearchParams({
+                username: username,
+                message: message,
+                action: 'send_tg'
+            }).toString()
+        })
+            .then(r => r.text())
+            .then(console.log)
+            .catch(console.error);
+    });
+}
 
 const namesByLang = {
     "en": {
