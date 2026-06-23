@@ -34,3 +34,4 @@
  - (+) Finished localisation function
  - (!) **appstars/slinkgen** API support
  - (+) Telegram sender
+ - (~) Updated libraries
