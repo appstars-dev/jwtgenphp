@@ -12,7 +12,6 @@ $debug = EnvIsSet("DEBUG_MODE", "", false);
 $dbFile = $rootDir . '/includes/tg_users.db';
 
 try {
-    // Вот эта строка создает соединение и файл БД, если его нет:
     $pdo = new PDO("sqlite:{$dbFile}", null, null, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -20,7 +19,6 @@ try {
 
     if ($debug) echo "DB connected: {$dbFile}\n";
 
-    // Создаем таблицу, если её нет
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS users (
             chat_id INTEGER PRIMARY KEY,
