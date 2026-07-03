@@ -158,7 +158,7 @@ $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                                     <img style="display: block" src="' . EnvIsSet('MAIL_LOGO', '', 'https://github.com/appstars-dev/jwtgenphp/blob/public/images/no_avatar.png?raw=true') . '" alt="logo" width="64">
                                   </td>
                                   <td style="padding: 0; width: 300px" align="right">
-                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="' . EnvIsSet('SMTP_USR', 'CheckSMTPLogin', "default_user") . '" target="_blank" rel="noopener">Mail back to author</a>
+                                   <a style="color: rgb(4, 119, 4); font-family: sans-serif; font-size: 16px; line-height: 22px; letter-spacing: normal; text-decoration: none;" href="' . EnvIsSet('SMTP_USR', 'CheckSMTPLogin', "default_user") . '" target="_blank" rel="noopener">'.ini_local($l10n_m_file,$L10N_MAIL,"Mail back to author").'</a>
                                    </td>
                                 </tr>
                               </tbody>
@@ -183,8 +183,8 @@ $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                             <table cellpadding="0" cellspacing="0" style="background-color: rgb(4, 119, 4); border-radius: 12px; padding: 14px 28px;">
                               <tbody><tr>
                                 <td valign="middle" align="center">
-                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="' . $link . $jwt . '" target="_blank" rel="noopener">
-                                    '.ini_local($l10n_m_file,$L10N_MAIL,"<b>Join</b>").'
+                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="' . $link . $jwt . '" target="_blank" rel="noopener"><b>
+                                    '.ini_local($l10n_m_file,$L10N_MAIL,"Join").'</b>
                                   </a>
                                 </td>
                               </tr>

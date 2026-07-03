@@ -35,3 +35,7 @@
  - (!) **appstars/slinkgen** API support
  - (+) Telegram sender
  - (~) Updated libraries
+
+## beta 3
+- Missing mailing localisation issues
+- Missing env params

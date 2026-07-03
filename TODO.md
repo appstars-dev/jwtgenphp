@@ -6,3 +6,5 @@
 - Multiple suggestion
 - Crop ports of URL
 - Public, private and shared hosting installation types
+- Meeting description
+- 
