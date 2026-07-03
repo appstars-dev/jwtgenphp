@@ -168,3 +168,8 @@ function ini_local(string $filePath, string $lang, string $englishValue): string
     }
     return $englishValue;
 }
+
+function TimeCheck(){
+    date_default_timezone_set($_ENV['DEFAULT_TIMEZONE']);
+    if (time() < $_ENV['MIN_DATE']){ return "Your server time is wrong:".date('d.m.Y H:i:s',time());} else {return '';}
+}
