@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', 1);
 require_once __DIR__ . '/includes/tg_db.php';
 require_once 'includes/bootstrap.php';
 $debug=EnvIsSet("DEBUG_MODE","", false);
@@ -9,7 +8,7 @@ $username=$_POST['username'];
 // Disable buffering to see messages as soon as we got it
 if ($debug === true) {
     ob_implicit_flush(true);
-
+    ini_set('display_errors', 1);
     logDebug("=== Testing Sending ===");
 
 

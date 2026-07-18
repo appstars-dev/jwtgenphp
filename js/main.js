@@ -11,25 +11,73 @@ function copyToClipboard(elementId) {
     }
 }
 function send_tg(btnid, inputid) {
-    document.getElementById(btnid).addEventListener('click', () => {
-        const username = document.getElementById(inputid).value.trim();
-        const message = document.getElementById('jwtlink').value.trim();
+    const btn = document.getElementById(btnid);
+    if (!btn) {
+        console.error(`Can not find id="${btnid}" button`);
+        return;
+    }
 
-        if (!username) return alert('Insert username');
-        if (!message) return alert('Insert message');
+    btn.addEventListener('click', () => {
+        const usernameInput = document.getElementById(inputid);
+        const jwtLinkInput = document.getElementById('jwtlink');
 
-        fetch('tg_send.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({
-                username: username,
-                message: message,
-                action: 'send_tg'
-            }).toString()
-        })
-            .then(r => r.text())
-            .then(console.log)
-            .catch(console.error);
+        if (!usernameInput || !jwtLinkInput) {
+            console.error('No input fields');
+            return;
+        }
+
+        const username = usernameInput.value.trim();
+        const message = jwtLinkInput.value.trim();
+
+        if (!username) {
+            alert('Insert username');
+            return;
+        }
+        if (!message) {
+            alert('Insert message');
+            return;
+        }
+
+        let promise;
+
+        if (tgmode === 'internal') {
+            promise = fetch('tg_send.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    username,
+                    message,
+                    action: 'send_tg',
+                }).toString(),
+            });
+        } else {
+            if (!tgmodhost) {
+                alert('Can not send by api, no host');
+                return;
+            }
+            promise = fetch(tgmodhost + '/api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, message }),
+            });
+        }
+
+        promise
+            .then(r => {
+                if (!r.ok) {
+                    return r.text().then(text => {
+                        throw new Error(`HTTP ${r.status}: ${text || r.statusText}`);
+                    });
+                }
+                return r.text();
+            })
+            .then(result => {
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                console.error('Postal error:', error);
+                alert('Postal error: ' + error.message);
+            });
     });
 }
 

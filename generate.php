@@ -5,6 +5,8 @@ $L10N_CODE = EnvIsSet('L10N_CODE', '', 'en');
 $l10n_file = "locale.ini";
 $L10N_MAIL=EnvIsSet('L10N_MAIL','','en');
 $l10n_m_file = "mail_l10n.ini";
+$tgmode=EnvIsSet('TGMODE','', 'internal');
+$tgapi=EnvIsSet('TGPURL','', 'http://localhost');
 $fhead = '<!DOCTYPE html >
 <html lang="' . $L10N_CODE . '">
     <title>' . ini_local($l10n_file, $L10N_CODE, "JWT token generator") . '</title>
@@ -15,7 +17,10 @@ $fhead = '<!DOCTYPE html >
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/iconfont.css">
+        <script>var tgmode = '.$tgmode.';
+        var tgmodhost='.$tgapi.';</script>
         <script type="text/javascript" src="js/main.js"></script>
+
 </head>
 <body>';
 $ffoot = '
