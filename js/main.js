@@ -19,7 +19,15 @@ function send_tg(btnid, inputid) {
 
     btn.addEventListener('click', () => {
         const usernameInput = document.getElementById(inputid);
-        const jwtLinkInput = document.getElementById('jwtlink');
+        var jwtLinkInput='';
+        switch (window.linktype){
+            case 'full': jwtLinkInput = document.getElementById('jwtlink');
+                break;
+            case 'short': jwtLinkInput = document.getElementById('sjwtlink');
+                break;
+            default: jwtLinkInput = document.getElementById('jwtlink');
+        }
+
 
         if (!usernameInput || !jwtLinkInput) {
             console.error('No input fields');

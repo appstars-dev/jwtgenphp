@@ -3,11 +3,12 @@
 require 'includes/bootstrap.php';
 $L10N_CODE = EnvIsSet('L10N_CODE', '', 'en');
 $l10n_file = "locale.ini";
-$L10N_MAIL=EnvIsSet('L10N_MAIL','','en');
+$L10N_MAIL = EnvIsSet('L10N_MAIL','','en');
 $l10n_m_file = "mail_l10n.ini";
-$chosentime=EnvIsSet('','InputExpireTime','');
+$chosentime= EnvIsSet('','InputExpireTime','');
 if (isset($chosentime)){
 $timestamp = strtotime($chosentime);
+$linkmode = EnvIsSet('SENDING_LINK','','full');
 } else {$timestamp = time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60;}
 $fhead = '<!DOCTYPE html >
 <html lang="' . $L10N_CODE . '">
@@ -23,6 +24,7 @@ $fhead = '<!DOCTYPE html >
         var tgmode =   '.json_encode(EnvIsSet('TG_MODE','', 'internal')).';
         var tgmodhost = '.json_encode(EnvIsSet('TG_PURL','', 'http://localhost')).';
         var tgapikey = '.json_encode(EnvIsSet('TG_API_KEY','','')).';
+        var linktype = '.json_encode($linkmode).';
     </script>
         <script type="text/javascript" src="js/main.js"></script>
 
@@ -139,7 +141,15 @@ if (isset($mail_wizard)) {
 
 //For mailing
 $mail_text = '<p>'. ini_local($l10n_m_file,$L10N_MAIL,"Dear").' '.EnvIsSet("","InputName","Anonymous").',</p> '.ini_local($l10n_m_file,$L10N_MAIL,"<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>");
-$mail_link = '<h2>Your Link:</h2> <a href="' . $link . $jwt . '">' . $link . $jwt . '</a></div>';
+switch ($linkmode){
+    case 'full': $mail_link = '<h2>Your Link:</h2> <a href="' . $link . $jwt . '">' . $link . $jwt . '</a></div>';
+    break;
+    case 'short': $mail_link = '<h2>Your Link:</h2> <a href="' . $sresult . '">' . $sresult . '</a></div>';
+    break;
+    default: $mail_link = '';
+    break;
+}
+
 $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 <html lang=en>
@@ -193,7 +203,7 @@ $mail_tpl = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
                             <table cellpadding="0" cellspacing="0" style="background-color: rgb(4, 119, 4); border-radius: 12px; padding: 14px 28px;">
                               <tbody><tr>
                                 <td valign="middle" align="center">
-                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="' . $link . $jwt . '" target="_blank" rel="noopener"><b>
+                                  <a style="color:rgb(255, 255, 255); font-family: sans-serif; font-weight:bold; font-size: 16px; -webkit-text-size-adjust:none; border-radius: 12px; line-height: 20px; text-decoration: none;" href="' . $mail_link . '" target="_blank" rel="noopener"><b>
                                     '.ini_local($l10n_m_file,$L10N_MAIL,"Join").'</b>
                                   </a>
                                 </td>
