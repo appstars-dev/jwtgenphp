@@ -7,6 +7,10 @@ $L10N_MAIL=EnvIsSet('L10N_MAIL','','en');
 $l10n_m_file = "mail_l10n.ini";
 $tgmode=EnvIsSet('TGMODE','', 'internal');
 $tgapi=EnvIsSet('TGPURL','', 'http://localhost');
+$chosentime=EnvIsSet('','InputExpireTime','');
+if (isset($chosentime)){
+$timestamp = strtotime($chosentime);
+} else {$timestamp = time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60;}
 $fhead = '<!DOCTYPE html >
 <html lang="' . $L10N_CODE . '">
     <title>' . ini_local($l10n_file, $L10N_CODE, "JWT token generator") . '</title>
@@ -46,7 +50,7 @@ $payload = json_encode([
     'aud' => EnvIsSet('APP_ID', 'InputAppid', ''),
     'iss' => EnvIsSet('APP_ID', 'InputAppid', ''),
     'sub' => EnvIsSet('JITSI_URI', 'InputURI', ''),
-    'exp' => time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60,
+    'exp' => $timestamp,
     'context' => array(
         'user_id' => array(
             "name" => EnvIsSet('', 'InputName', 'Anonymous'),

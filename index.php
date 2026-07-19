@@ -21,7 +21,7 @@ $version="beta2";
         <link rel="stylesheet" href="css/sociallyiconic-embedded.css">
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-4.0.0.min.js"></script>
-        <script src="js/popper.min.js"></script>-->
+        <script src="js/popper.min.js"></script>
         <script src="js/tempus-dominus.min.js"></script>
         <script src="js/main.js"></script>
     <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
@@ -140,15 +140,23 @@ $version="beta2";
 
     <div class="mb-3">
     <label for="InputRoom" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Valid until'); ?></label>
-     <div class="input-group mb-3" id="ExpireTime" data-format="yyyy-mm-dd">
-           <input type="text" placeholder="07/31/2026 2:57 PM" class="form-control form-control-lg" readonly=""><button type="button" class="btn btn-outline-primary feather icon-calendar"></button>
+     <div class="input-group mb-3" id="ExpireTime" data-format="2025-06-17T19:30:45+03:00">
+           <input type="text" id="InputExpireTime" name="InputExpireTime" placeholder="07/31/2026 2:57 PM" class="form-control form-control-lg" readonly=""><button type="button" class="btn btn-outline-primary feather icon-calendar"></button>
         </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const picker = new tempusDominus.TempusDominus(
-                document.getElementById('ExpireTime')
-            );
+            const container = document.getElementById('InputExpireTime');
+
+            if (!container) return;
+
+            const picker = new tempusDominus.TempusDominus(container);
+
+            picker.on('change', function (e) {
+                if (e.date) {
+                    const isoString = e.date.toISOString();
+                }
+            });
         });</script>
     </div>
 
