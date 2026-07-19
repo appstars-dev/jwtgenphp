@@ -40,7 +40,7 @@ function send_tg(btnid, inputid) {
 
         let promise;
 
-        if (tgmode === 'internal') {
+        if (window.tgmode === 'internal') {
             promise = fetch('tg_send.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -51,13 +51,14 @@ function send_tg(btnid, inputid) {
                 }).toString(),
             });
         } else {
-            if (!tgmodhost) {
+            if (!window.tgmodhost) {
                 alert('Can not send by api, no host');
                 return;
             }
-            promise = fetch(tgmodhost + '/api.php', {
+            promise = fetch(window.tgmodhost + '/api.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                'X-API-KEY': window.tgapikey },
                 body: JSON.stringify({ username, message }),
             });
         }
