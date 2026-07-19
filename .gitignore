@@ -89,3 +89,4 @@ $RECYCLE.BIN/
 *.msix
 *.msm
 *.msp
+*.test.php
