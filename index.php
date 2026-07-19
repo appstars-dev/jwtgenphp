@@ -2,7 +2,7 @@
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
 $l10n_file="locale.ini";
 require_once 'public.conf.php';
-$version="beta2";
+$version="beta3";
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $L10N_CODE; ?>">
