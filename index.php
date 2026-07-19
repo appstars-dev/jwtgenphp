@@ -141,7 +141,7 @@ $version="beta3";
     <div class="mb-3">
     <label for="InputRoom" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Valid until'); ?></label>
      <div class="input-group mb-3" id="ExpireTime" data-format="2025-06-17T19:30:45+03:00">
-           <input type="text" id="InputExpireTime" name="InputExpireTime" placeholder="07/31/2026 2:57 PM" class="form-control form-control-lg" readonly=""><button type="button" class="btn btn-outline-primary feather icon-calendar"></button>
+           <input type="text" id="InputExpireTime" name="InputExpireTime" placeholder="<?=EnvIsSet('EXPIRES', 'ExpirationTime', '30') ?> m" class="form-control form-control-lg" readonly=""><button type="button" class="btn btn-outline-primary feather icon-calendar"></button>
         </div>
 
     <script>
