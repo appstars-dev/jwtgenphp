@@ -13,16 +13,16 @@ $version="beta2";
         <link rel="icon" href="images/no_avatar.png" type="image/png">
         <link rel="apple-touch-icon" href="images/no_avatar.png" type="image/png">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/tempus-dominus.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/iconfont.css">
         <link rel="stylesheet" href="css/sociallyiconic.css">
         <link rel="stylesheet" href="css/sociallyiconic-codes.css">
         <link rel="stylesheet" href="css/sociallyiconic-embedded.css">
-        <link rel="stylesheet" href="css/bootstrap-datepicker.css"
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-4.0.0.min.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/bootstrap-datepicker.l10n.js"></script>
+        <script src="js/popper.min.js"></script>-->
+        <script src="js/tempus-dominus.min.js"></script>
         <script src="js/main.js"></script>
     <?php addRecaptchaJS(EnvIsSet('GR_SITE_KEY','','')); ?>
     <style>
@@ -137,17 +137,22 @@ $version="beta2";
     <input type="checkbox" class="form-check-input" name="CheckWildcard" id="CheckWildcard">
     <label class="form-check-label" for="CheckWildcard"><?php echo ini_local($l10n_file, $L10N_CODE, 'Access to any room');?></label>
 </div>
-  <div class="mb-3 date">
-    <label for="InputTime" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Valid until');?></label>
-      <div class="input-group date" data-provide="datepicker">
-          <input type="text" class="form-control form-control-lg>
-          <!-- Можно добавить иконку календаря -->
-          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-      </div>
-    <input type="text" class="form-control form-control-lg" name="InputTime" id="InputTime" aria-describedby="TimeHelp" >
-    <div id="AppidHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, "Custom validation time");?>.</div>
-  </div>
-  <div class="mb-3 div_secret">
+
+    <div class="mb-3">
+    <label for="InputRoom" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Valid until'); ?></label>
+     <div class="input-group mb-3" id="ExpireTime" data-format="yyyy-mm-dd">
+           <input type="text" placeholder="07/31/2026 2:57 PM" class="form-control form-control-lg" readonly=""><button type="button" class="btn btn-outline-primary feather icon-calendar"></button>
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const picker = new tempusDominus.TempusDominus(
+                document.getElementById('ExpireTime')
+            );
+        });</script>
+    </div>
+
+    <div class="mb-3 div_secret">
     <label for="InputJSecret" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Jitsi Secret');?></label>
     <input type="password" class="form-control form-control-lg" name="InputJSecret" id="InputJSecret" aria-describedby="JSecretHelp" <?php if (empty($_ENV['JWT_KEY'])){echo 'required';} ?> >
     <div id="JSecretHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Secret of your Jitsi application');?></div>
@@ -180,14 +185,5 @@ $version="beta2";
 </form>
 </div>
     <div id="footer">JWTGenPHP <?php echo $version.' &copy;'.date("Y"); ?> AppStars.<br> MIT and other licenses</div>
-    <script>
-        $(document).ready(function() {
-            $('.date').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true
-            });
-        });
-    </script>
 </body>
 </html>

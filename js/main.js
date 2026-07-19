@@ -204,7 +204,6 @@ function generateRandomFullName(langCode = 'en') {
     const gender = Math.random() < 0.5 ? 'male' : 'female';
     const personData = data[gender];
 
-    // Проверяем наличие обязательных полей
     if (!personData || !personData.first || !personData.last) {
         throw new Error(`Invalid data structure for language "${langCode}"`);
     }
@@ -215,12 +214,10 @@ function generateRandomFullName(langCode = 'en') {
     let middle = '';
     let patronymic = '';
 
-    // Получаем среднее имя, если доступно
     if (personData.middle && personData.middle.length > 0) {
         middle = getRandomItem(personData.middle);
     }
 
-    // Получаем отчество, если доступно и для русского языка
     if (langCode === 'ru' && personData.patronymic && personData.patronymic.length > 0) {
         patronymic = getRandomItem(personData.patronymic);
     }
@@ -259,12 +256,6 @@ function generateRandomFullName(langCode = 'en') {
     return result;
 }
 
-/**
- * Генерирует массив из N случайных ФИО для указанного языка (пол у каждого случайный).
- * @param {number} count - number of full names
- * @param {string} langCode - 2 symbols language code
- * @returns {string[]} array of strings
- */
 function generateRandomFullNames(count, langCode = 'en') {
     const result = [];
     for (let i = 0; i < count; i++) {

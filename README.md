@@ -15,4 +15,4 @@ Uses https://feathericons.com/
 
 Uses **HaeckDesign/Get-Social-Social-Media-Font** under CC 0 
 
-Uses **uxsolutions/bootstrap-datepicker**
+Uses **Eonasdan/tempus-dominus**
