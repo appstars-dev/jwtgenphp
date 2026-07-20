@@ -54,12 +54,30 @@ $payload = json_encode([
     'iss' => EnvIsSet('APP_ID', 'InputAppid', ''),
     'sub' => EnvIsSet('JITSI_URI', 'InputURI', ''),
     'exp' => $timestamp,
+    'nbf' => time() - 180,
+    'iat' => time(),
     'context' => array(
-        'user_id' => array(
+        'user' => array(
             "name" => EnvIsSet('', 'InputName', 'Anonymous'),
             "email" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'),
-            "id" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'))),
-    'moderator' => EnvIsSet('', 'CheckModerator', false) === "on",
+            "avatar" => MakeGravatarLink(EnvIsSet('', 'InputEmail', 'anonymous@email.com')),
+            "id" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'),
+            "affiliation" => "member",
+            'moderator' => EnvIsSet('', 'CheckModerator', false) === "on",
+        ),
+        'features' => array(
+            "recording" => true,
+            "liveStreaming" => false,
+            "sip-inbound-call" => false,
+            "sip-outbound-call" => false,
+            "inboundCall" => false,
+            "outboundCall" => false,
+            "screenSharing" => true,
+            "file-upload" => false,
+            "transcription" => false,
+            "list-visitors" => false
+        )
+    ),
     'room' => $room,
 ]);
 

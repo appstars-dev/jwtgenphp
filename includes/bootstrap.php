@@ -173,3 +173,8 @@ function TimeCheck(){
     date_default_timezone_set($_ENV['DEFAULT_TIMEZONE']);
     if (time() < $_ENV['MIN_DATE']){ return "Your server time is wrong:".date('d.m.Y H:i:s',time());} else {return '';}
 }
+
+function MakeGravatarLink($email){
+
+    return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($email))).'?s=200';
+}
