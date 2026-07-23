@@ -21,7 +21,6 @@ try {
 
     require $dbConfigPath;
 
-    // Проверка: переменная $pdo должна появиться в глобальной области
     if (!isset($pdo) || !$pdo instanceof PDO) {
         logDebug("FATAL: \$pdo is not created after loading tg_db.php.");
         exit(1);
@@ -81,7 +80,6 @@ if (!isset($data['ok']) || !$data['ok'] || empty($data['result'])) {
     exit(0);
 }
 
-// Теперь $pdo точно существует!
 $stmt = $pdo->prepare("
     INSERT OR REPLACE INTO users (chat_id, username, first_name, last_name, updated_at) 
     VALUES (:chat_id, :username, :first_name, :last_name, CURRENT_TIMESTAMP)

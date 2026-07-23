@@ -1,5 +1,4 @@
 <?php
-// HTML Init
 require 'includes/bootstrap.php';
 $L10N_CODE = EnvIsSet('L10N_CODE', '', 'en');
 $l10n_file = "locale.ini";
@@ -21,7 +20,7 @@ $fhead = '<!DOCTYPE html >
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/iconfont.css">
         <script>
-        var tgmode =   '.json_encode(EnvIsSet('TG_MODE','', 'internal')).';
+        var tgmode = '.json_encode(EnvIsSet('TG_MODE','', 'internal')).';
         var tgmodhost = '.json_encode(EnvIsSet('TG_PURL','', 'http://localhost')).';
         var tgapikey = '.json_encode(EnvIsSet('TG_API_KEY','','')).';
         var linktype = '.json_encode($linkmode).';
@@ -33,11 +32,11 @@ $fhead = '<!DOCTYPE html >
 $ffoot = '
 </body>
 </html>';
-$joinroom = EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
+$join_room = EnvIsSet('DEFAULT_ROOM', 'InputRoom', 'public');
 if (EnvIsSet('', 'CheckWildcard', false)) {
     $room = '*';
 } else {
-    $room = $joinroom;
+    $room = $join_room;
 }
 // get the local secret key
 $secret = EnvIsSet('JWT_KEY', 'InputJSecret', 'no secret');
@@ -98,7 +97,7 @@ $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
 //Create Link
 $jitsi_uri = EnvIsSet('JITSI_URI', 'InputURI', '');
-$link = CreateBaseURI(EnvIsSet('URI_PROTO', '', 'https'), $jitsi_uri) . "/" . $joinroom . "?jwt=";
+$link = CreateBaseURI(EnvIsSet('URI_PROTO', '', 'https'), $jitsi_uri) . "/" . $join_room . "?jwt=";
 if (isset($mail_wizard)) {
     echo('');
 } else {

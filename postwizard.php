@@ -1,8 +1,6 @@
 <?php
 $mail_wizard = true;
-$mail_tpl='';
-$mail_text='';
-$mail_link = '';
+$mail_tpl = $mail_text = $mail_link = '';
 
 if (file_exists('.vendor/autoload.php')) {
     require_once('vendor/autoload.php');

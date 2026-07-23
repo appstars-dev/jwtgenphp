@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/includes/tg_db.php';
 require_once 'includes/bootstrap.php';
-$debug=EnvIsSet("DEBUG_MODE","", false);
+$debug = EnvIsSet("DEBUG_MODE","", false);
 $token = EnvIsSet("TG_BOT_TOKEN","","");
-$message=FieldV($_POST['message']);
-$username=FieldV($_POST['username']);
+$message = FieldV($_POST['message']);
+$username = FieldV($_POST['username']);
 // Disable buffering to see messages as soon as we got it
 if ($debug === true) {
     ob_implicit_flush(true);
@@ -37,7 +37,7 @@ function sendMessageByUsername($pdo, $token, $username, $text)
     $stmt = $pdo->prepare("SELECT chat_id, username FROM users WHERE username = :username");
     $stmt->execute([':username' => $username]);
     $row = $stmt->fetch();
-    $debug=EnvIsSet("DEBUG_MODE","", false);
+    $debug = EnvIsSet("DEBUG_MODE","", false);
 
     if (!$row) {
         logDebug("User @{$username} was not found in the database.!<br>");
