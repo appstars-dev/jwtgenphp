@@ -39,11 +39,14 @@ if (!isset($uri)) $proto="";
 function FieldV(string $input): string
 {
     $input = (string)$input;
-
+    $clean = trim($input);
+    if (strpos($clean, '@') === 0) {
+        $clean = substr($clean, 1);
+    }
     $maxLength = 150;
-    $clean = mb_substr($input, 0, $maxLength, 'UTF-8');
+    $ready= mb_substr($clean, 0, $maxLength, 'UTF-8');
 
-    return htmlspecialchars($clean, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    return htmlspecialchars($ready, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }
 
 /**
