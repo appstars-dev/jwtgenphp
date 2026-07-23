@@ -3,8 +3,8 @@ require_once __DIR__ . '/includes/tg_db.php';
 require_once 'includes/bootstrap.php';
 $debug=EnvIsSet("DEBUG_MODE","", false);
 $token = EnvIsSet("TG_BOT_TOKEN","","");
-$message=$_POST['message'];
-$username=$_POST['username'];
+$message=FieldV($_POST['message']);
+$username=FieldV($_POST['username']);
 // Disable buffering to see messages as soon as we got it
 if ($debug === true) {
     ob_implicit_flush(true);

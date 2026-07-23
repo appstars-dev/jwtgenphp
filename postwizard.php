@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 // Initialize the PHPMailer
 $mail = new PHPMailer(true);
 try {
-    $mail->addAddress($_POST['InputEmail']);
+    $mail->addAddress(FieldV($_POST['InputEmail']));
 } catch (Exception $e) {
 
 }

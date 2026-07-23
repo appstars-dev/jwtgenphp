@@ -36,6 +36,12 @@ if ($proto != "http" or $proto != "https") {
 if (!isset($uri)) $proto="";
     return $proto.$uri;
 }
+function FieldV($input)
+{
+    $clean = preg_replace('/[^А-Яа-яЁёA-Za-z0-9.:,/\-@]/u', '', $input);
+
+    return htmlspecialchars($clean, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}
 
 /**
  * @param string $env
@@ -44,10 +50,12 @@ if (!isset($uri)) $proto="";
  * @return mixed|string|void
  */
 function EnvIsSet (string $env, string $post, string $default) {
+    $post=FieldV($post);
+    $env=FieldV($env);
 $value = $default;
 if (empty($_ENV[$env]) or (strcmp($_ENV[$env], "") == 0))
     {
-        $value = (empty($_POST[$post]) or strcmp($_POST[$post], "") == 0) ? $default : $_POST[$post];
+        $value = (empty(f[$post]) or strcmp($_POST[$post], "") == 0) ? $default : $_POST[$post];
     } else {$value=$_ENV[$env];}
     if (isset($value)) {
         return $value;
