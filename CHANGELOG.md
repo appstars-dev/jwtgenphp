@@ -36,6 +36,9 @@
  - (+) Telegram sender
  - (~) Updated libraries
 
-## beta 3
-- Missing mailing localisation issues
-- Missing env params
+## beta3
+- (~) Missing mailing localisation issues
+- (~) Missing env params
+- (!) **appstars/tbotapimod** API support
+- (+) Gravatar support
+- (!) Fixed token for additional features
