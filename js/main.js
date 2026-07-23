@@ -10,7 +10,7 @@ function copyToClipboard(elementId) {
         console.error("Unable to copy text: ", err);
     }
 }
-function send_tg(btnid, inputid) {
+function send_tg(btnid, inputid, tgmodhost, tgapikey) {
     const btn = document.getElementById(btnid);
     if (!btn) {
         console.error(`Can not find id="${btnid}" button`);
@@ -59,14 +59,14 @@ function send_tg(btnid, inputid) {
                 }).toString(),
             });
         } else {
-            if (!window.tgmodhost) {
+            if (!tgmodhost) {
                 alert('Can not send by api, no host');
                 return;
             }
-            promise = fetch(window.tgmodhost + '/api.php', {
+            promise = fetch(tgmodhost + '/api.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json',
-                'X-API-KEY': window.tgapikey },
+                'X-API-KEY': tgapikey },
                 body: JSON.stringify({ username, message }),
             });
         }

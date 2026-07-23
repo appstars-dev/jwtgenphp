@@ -21,8 +21,6 @@ $fhead = '<!DOCTYPE html >
         <link rel="stylesheet" href="css/iconfont.css">
         <script>
         var tgmode = '.json_encode(EnvIsSet('TG_MODE','', 'internal')).';
-        var tgmodhost = '.json_encode(EnvIsSet('TG_PURL','', 'http://localhost')).';
-        var tgapikey = '.json_encode(EnvIsSet('TG_API_KEY','','')).';
         var linktype = '.json_encode($linkmode).';
     </script>
         <script type="text/javascript" src="js/main.js"></script>
@@ -148,7 +146,7 @@ if (isset($mail_wizard)) {
 <label class="form-label"><b>' . ini_local($l10n_file, $L10N_CODE, "Send to a participant of")." <a href='https://t.me/". EnvIsSet("TG_BOT_NAME","","your telegram bot")."'>@".EnvIsSet("TG_BOT_NAME","","your telegram bot")."</a>" . ':</b></label>
 <div class="input-group mb-3">
     <input type="text" class="form-control" id="tguser" name="tguser" placeholder="username">
-    <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\')"></button>
+    <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\',' .EnvIsSet('TG_PURL','', 'http://localhost').','.EnvIsSet('TG_API_KEY','','').' )"></button>
         </div>
     </form>
     </div>';
