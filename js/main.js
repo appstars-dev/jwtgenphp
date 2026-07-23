@@ -81,6 +81,7 @@ function send_tg(btnid, inputid, tgmodhost, tgapikey) {
                 return r.text();
             })
             .then(result => {
+                alert('Queued');
                 console.log('Success:', result);
             })
             .catch(error => {

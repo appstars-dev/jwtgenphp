@@ -9,6 +9,7 @@ if (isset($chosentime)){
 $timestamp = strtotime($chosentime);
 $linkmode = EnvIsSet('SENDING_LINK','','full');
 } else {$timestamp = time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60;}
+$meeting_desc= EnvIsSet("","InputDesc","");
 $fhead = '<!DOCTYPE html >
 <html lang="' . $L10N_CODE . '">
     <title>' . ini_local($l10n_file, $L10N_CODE, "JWT token generator") . '</title>
@@ -20,6 +21,7 @@ $fhead = '<!DOCTYPE html >
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/iconfont.css">
         <script>
+        var m_desc = '.json_encode($meeting_desc).';
         var tgmode = '.json_encode(EnvIsSet('TG_MODE','', 'internal')).';
         var linktype = '.json_encode($linkmode).';
     </script>
@@ -146,7 +148,7 @@ if (isset($mail_wizard)) {
 <label class="form-label"><b>' . ini_local($l10n_file, $L10N_CODE, "Send to a participant of")." <a href='https://t.me/". EnvIsSet("TG_BOT_NAME","","your telegram bot")."'>@".EnvIsSet("TG_BOT_NAME","","your telegram bot")."</a>" . ':</b></label>
 <div class="input-group mb-3">
     <input type="text" class="form-control" id="tguser" name="tguser" placeholder="username">
-    <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\',' .EnvIsSet('TG_PURL','', 'http://localhost').','.EnvIsSet('TG_API_KEY','','').' )"></button>
+    <button id="btgsend" type="button" class="btn btn-outline-secondary feather icon-send" onclick="send_tg(\'btgsend\', \'tguser\',\'' .EnvIsSet('TG_PURL','', 'http://localhost').'\',\''.EnvIsSet('TG_API_KEY','','').'\')"></button>
         </div>
     </form>
     </div>';
@@ -155,7 +157,6 @@ if (isset($mail_wizard)) {
 }
 
 //For mailing
-$meeting_desc= EnvIsSet("","InputDesc","");
 if(isset($meeting_desc)){$meeting_topic=ini_local($l10n_m_file,$L10N_MAIL,"<p><b>Meeting topic:</b><br>").$meeting_desc."</p>";} else {$meeting_topic="";}
 $mail_text = '<p>'. ini_local($l10n_m_file,$L10N_MAIL,"Dear").' '.EnvIsSet("","InputName","Anonymous").',</p> '.ini_local($l10n_m_file,$L10N_MAIL,"<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>".$meeting_topic);
 switch ($linkmode){
