@@ -157,7 +157,9 @@ if (isset($mail_wizard)) {
 }
 
 //For mailing
-$mail_text = '<p>'. ini_local($l10n_m_file,$L10N_MAIL,"Dear").' '.EnvIsSet("","InputName","Anonymous").',</p> '.ini_local($l10n_m_file,$L10N_MAIL,"<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>");
+$meeting_desc= EnvIsSet("","InputDesc","");
+if(isset($meeting_desc)){$meeting_topic=ini_local($l10n_m_file,$L10N_MAIL,"<p><b>Meeting topic:</b><br>").$meeting_desc."</p>";} else {$meeting_topic="";}
+$mail_text = '<p>'. ini_local($l10n_m_file,$L10N_MAIL,"Dear").' '.EnvIsSet("","InputName","Anonymous").',</p> '.ini_local($l10n_m_file,$L10N_MAIL,"<p>You were suggested to the Jitsi conference. In case you want to participate meeting, please click the button below. <br> Be careful, double check the mail sender to avoid unwanted circumstances</p>".$meeting_topic);
 switch ($linkmode){
     case 'full': $mail_link = '<h2>Your Link:</h2> <a href="' . $link . $jwt . '">' . $link . $jwt . '</a></div>';
     break;
