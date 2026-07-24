@@ -42,3 +42,5 @@
 - (!) **appstars/tbotapimod** API support
 - (+) Gravatar support
 - (!) Fixed token for additional features
+- (+) Allows to get basic variables (?name="Jane%20Doe"&email="my@example.com"&room="fake")
+- (~) Split to names.js
