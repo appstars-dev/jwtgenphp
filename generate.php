@@ -4,10 +4,14 @@ $L10N_CODE = EnvIsSet('L10N_CODE', '', 'en');
 $l10n_file = "locale.ini";
 $L10N_MAIL = EnvIsSet('L10N_MAIL','','en');
 $l10n_m_file = "mail_l10n.ini";
-$chosentime= EnvIsSet('','InputExpireTime','');
+$chosentime = EnvIsSet('','InputExpireTime','');
 if ($chosentime === '') {
     $timestamp = time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60;
 } else {$timestamp = strtotime($chosentime);}
+$NotBefore = EnvIsSet('','InputNotBefore','');
+if ($NotBefore === '') {
+    $nbf = time() - 180;
+} else {$nbf = strtotime($NotBefore);}
 $linkmode = EnvIsSet('SENDING_LINK','','full');
 $meeting_desc= EnvIsSet("","InputDesc","");
 $fhead = '<!DOCTYPE html >
@@ -55,7 +59,7 @@ $payload = json_encode([
     'iss' => EnvIsSet('APP_ID', 'InputAppid', ''),
     'sub' => EnvIsSet('JITSI_URI', 'InputURI', ''),
     'exp' => $timestamp,
-    'nbf' => time() - 180,
+    'nbf' => $nbf,
     'iat' => time(),
     'context' => array(
         'user' => array(
