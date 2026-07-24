@@ -21,6 +21,7 @@ $fhead = '<!DOCTYPE html >
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/iconfont.css">
         <script>
+        var js_l10n = '.json_encode($L10N_CODE).';
         var m_desc = '.json_encode($meeting_desc).';
         var tgmode = '.json_encode(EnvIsSet('TG_MODE','', 'internal')).';
         var linktype = '.json_encode($linkmode).';
@@ -38,6 +39,7 @@ if (EnvIsSet('', 'CheckWildcard', false)) {
 } else {
     $room = $join_room;
 }
+if (EnvIsSet('', 'CheckOwner', false) === "on"){$affilation = "owner";} else {$affilation = "member";}
 // get the local secret key
 $secret = EnvIsSet('JWT_KEY', 'InputJSecret', 'no secret');
 
@@ -60,21 +62,21 @@ $payload = json_encode([
             "name" => EnvIsSet('', 'InputName', 'Anonymous'),
             "email" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'),
             "avatar" => MakeGravatarLink(EnvIsSet('', 'InputEmail', 'anonymous@email.com')),
-            "id" => EnvIsSet('', 'InputEmail', 'anonymous@email.com'),
-            "affiliation" => "member",
+            "id" => generateGuid(),
+            "affiliation" => $affilation,
             'moderator' => EnvIsSet('', 'CheckModerator', false) === "on",
         ),
         'features' => array(
-            "recording" => true,
-            "liveStreaming" => false,
-            "sip-inbound-call" => false,
-            "sip-outbound-call" => false,
-            "inboundCall" => false,
-            "outboundCall" => false,
-            "screenSharing" => true,
-            "file-upload" => false,
-            "transcription" => false,
-            "list-visitors" => false
+            "recording" => EnvIsSet('', 'CheckRecording', true) === "on",
+            "liveStreaming" => EnvIsSet('', 'CheckLiveStreaming', false) === "on",
+            "sip-inbound-call" => EnvIsSet('', 'CheckSIPOC', false) === "on",
+            "sip-outbound-call" => EnvIsSet('', 'CheckSIPIC', false) === "on",
+            "inboundCall" => EnvIsSet('', 'CheckIC', false) === "on",
+            "outboundCall" => EnvIsSet('', 'CheckOC', false) === "on",
+            "screenSharing" => EnvIsSet('', 'CheckSharing', true) === "on",
+            "file-upload" => EnvIsSet('', 'CheckFU', false) === "on",
+            "transcription" => EnvIsSet('', 'CheckTranscript', false) === "on",
+            "list-visitors" => EnvIsSet('', 'CheckVisitors', false) === "on"
         )
     ),
     'room' => $room,

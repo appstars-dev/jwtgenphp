@@ -192,3 +192,11 @@ function MakeGravatarLink($email){
 
     return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($email))).'?s=200';
 }
+
+function generateGuid() {
+    $data = random_bytes(16);
+    $data = chr(ord($data) & 0x0f | 0x40);
+    $data = chr(ord($data) & 0x3f | 0x80);
+
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}

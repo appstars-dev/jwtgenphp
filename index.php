@@ -1,5 +1,7 @@
 <?php require_once 'includes/bootstrap.php';
 $L10N_CODE=EnvIsSet('L10N_CODE','','en');
+//$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 0, 2);
+
 $l10n_file="locale.ini";
 require_once 'public.conf.php';
 $version="beta3";
@@ -118,6 +120,10 @@ $version="beta3";
     <input type="checkbox" class="form-check-input" name="CheckModerator" id="CheckModerator">
     <label class="form-check-label" for="CheckModerator"><?php echo ini_local($l10n_file, $L10N_CODE, 'Is moderator');?></label>
   </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" name="CheckOwner" id="CheckOwner">
+        <label class="form-check-label" for="CheckOwner"><?php echo ini_local($l10n_file, $L10N_CODE, 'Is owner');?></label>
+    </div>
   <hr>
 
   <div class="mb-3 div_uri">
@@ -137,6 +143,78 @@ $version="beta3";
     <input type="checkbox" class="form-check-input" name="CheckWildcard" id="CheckWildcard">
     <label class="form-check-label" for="CheckWildcard"><?php echo ini_local($l10n_file, $L10N_CODE, 'Access to any room');?></label>
 </div>
+<!-- -->
+
+    <div class="row">
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckRecording" id="CheckRecording" checked>
+                <label class="form-check-label" for="CheckRecording"><?php echo ini_local($l10n_file, $L10N_CODE, 'Recording');?></label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckLiveStreaming" id="CheckLiveStreaming">
+                <label class="form-check-label" for="CheckLiveStreaming"><?php echo ini_local($l10n_file, $L10N_CODE, 'Live Streaming');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckSIPIC" id="CheckSIPIC">
+                <label class="form-check-label" for="CheckSIPIC"><?php echo ini_local($l10n_file, $L10N_CODE, 'SIP Inbound call');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckSIPOC" id="CheckSIPOC">
+                <label class="form-check-label" for="CheckSIPOC"><?php echo ini_local($l10n_file, $L10N_CODE, 'SIP Outbound call');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckIC" id="CheckIC">
+                <label class="form-check-label" for="CheckIC"><?php echo ini_local($l10n_file, $L10N_CODE, 'Inbound call');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckOC" id="CheckOC">
+                <label class="form-check-label" for="CheckOC"><?php echo ini_local($l10n_file, $L10N_CODE, 'Outbound call');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckSharing" id="CheckSharing" checked>
+                <label class="form-check-label" for="CheckSharing"><?php echo ini_local($l10n_file, $L10N_CODE, 'Screen Sharing');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckFU" id="CheckFU">
+                <label class="form-check-label" for="CheckFU"><?php echo ini_local($l10n_file, $L10N_CODE, 'File uploading');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckTranscript" id="CheckTranscript">
+                <label class="form-check-label" for="CheckTranscript"><?php echo ini_local($l10n_file, $L10N_CODE, 'Transcription');?></label>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="CheckVisitors" id="CheckVisitors">
+                <label class="form-check-label" for="CheckVisitors"><?php echo ini_local($l10n_file, $L10N_CODE, 'List visitors');?></label>
+            </div>
+        </div>
+    </div>
 
     <div class="mb-3">
     <label for="InputRoom" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Valid until'); ?></label>
