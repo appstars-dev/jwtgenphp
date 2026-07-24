@@ -210,3 +210,12 @@ function generateGuid() {
         substr($hex, 24, 8)
     );
 }
+
+function GetVars($var)
+{
+    $raw = $_GET[$var] ?? '';
+    $clean = str_replace('%22', '', $raw);
+    $clean = preg_replace('/[\'"]/u', '', $clean);
+
+    return htmlspecialchars($clean, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}

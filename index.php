@@ -99,7 +99,7 @@ $version="beta3";
     <div class="mb-3">
     <label for="InputName" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Person name');?></label>
         <div class="input-group mb-3">
-    <input type="text" class="form-control form-control-lg" name="InputName" id="InputName" placeholder="<?php echo ini_local($l10n_file, $L10N_CODE, 'Anonymous'); ?>" aria-describedby="NameHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="fillRandomName('<?= $L10N_CODE ?>')"></button>
+    <input type="text" class="form-control form-control-lg" name="InputName" id="InputName" value="<?= GetVars('name') ?>" placeholder="<?php echo ini_local($l10n_file, $L10N_CODE, 'Anonymous'); ?>" aria-describedby="NameHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="fillRandomName('<?= $L10N_CODE ?>')"></button>
         </div>
     <div id="NameHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Participant\'s name'); ?></div>
   </div>
@@ -113,7 +113,7 @@ $version="beta3";
   <div class="mb-3">
     <label for="InputEmail" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Email address');?></label>
       <div class="input-group mb-3">
-    <input type="email" class="form-control form-control-lg" name="InputEmail" id="InputEmail" aria-describedby="emailHelp" required><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="randomEmail()"></button>
+    <input type="email" class="form-control form-control-lg" name="InputEmail" id="InputEmail" value="<?= GetVars('email') ?>" aria-describedby="emailHelp" required><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="randomEmail()"></button>
       </div>
     <div id="emailHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Whom you want to meet'); ?></div>
   </div>
@@ -136,7 +136,7 @@ $version="beta3";
     <div class="mb-3">
     <label for="InputRoom" class="form-label"><?php echo ini_local($l10n_file, $L10N_CODE, 'Room name'); ?></label>
         <div class="input-group mb-3">
-    <input type="text" class="form-control form-control-lg" name="InputRoom" id="InputRoom" placeholder="<?php echo EnvIsSet('DEFAULT_ROOM','','public')?>" aria-describedby="RoomHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="generateUUID()"></button><button type="button" class="btn btn-outline-primary feather icon-copy" onclick="copyToClipboard('InputRoom')"></button>
+    <input type="text" class="form-control form-control-lg" name="InputRoom" id="InputRoom" value="<?= GetVars('room') ?>" placeholder="<?php echo EnvIsSet('DEFAULT_ROOM','','public')?>" aria-describedby="RoomHelp"><button type="button" class="btn btn-outline-primary feather icon-shuffle" onclick="generateUUID()"></button><button type="button" class="btn btn-outline-primary feather icon-copy" onclick="copyToClipboard('InputRoom')"></button>
         </div>
     <div id="RoomHelp" class="form-text"><?php echo ini_local($l10n_file, $L10N_CODE, 'Permitted room');?></div>
   </div>
