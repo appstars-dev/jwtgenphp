@@ -5,10 +5,10 @@ $l10n_file = "locale.ini";
 $L10N_MAIL = EnvIsSet('L10N_MAIL','','en');
 $l10n_m_file = "mail_l10n.ini";
 $chosentime= EnvIsSet('','InputExpireTime','');
-if (isset($chosentime)){
-$timestamp = strtotime($chosentime);
+if ($chosentime === '') {
+    $timestamp = time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60;
+} else {$timestamp = strtotime($chosentime);}
 $linkmode = EnvIsSet('SENDING_LINK','','full');
-} else {$timestamp = time() + EnvIsSet('EXPIRES', 'ExpirationTime', '30') * 60;}
 $meeting_desc= EnvIsSet("","InputDesc","");
 $fhead = '<!DOCTYPE html >
 <html lang="' . $L10N_CODE . '">
