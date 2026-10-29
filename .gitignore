@@ -90,3 +90,5 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.test.php
+
+.devcontainer
